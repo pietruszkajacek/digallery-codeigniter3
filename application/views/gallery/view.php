@@ -13,9 +13,10 @@
 							<div class="container-thumb-mini">
 								<div class="outer-block-thumb-mini">
 									<?php 
-										echo anchor("gallery/view/{$gallery->id}/" . ($gallery_image->order + 1), img(array('src' => $thumb_mini_config['path']
-											. (($gallery_image->plus_18 && !$adult_user) && !(isset($logged_in_user) && $logged_in_user->id === $gallery_image->user_id)
-											? 'stop_mini.png' : $gallery_image->file_name))));
+										echo anchor("gallery/view/{$gallery->id}/" . ($gallery_image->order + 1), 	
+												img(($gallery_image->plus_18 && !$adult_user) && !(isset($logged_in_user) && $logged_in_user->id === $gallery_image->user_id) 
+														? array('src' => 'assets/img/stop_mini.png')
+														: array('src' => $thumb_mini_config['path'] . $gallery_image->file_name)));
 									?>
 								</div>
 							</div>

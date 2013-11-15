@@ -6,8 +6,9 @@
 				<div class="container-thumb-mini">
 					<div class="outer-block-thumb-mini">
 						<?php
-						echo img(array('src' => $thumb_mini_config['path'] . (($thumb['plus_18'] && !$adult_user) 
-								&& !(isset($logged_in_user) && $logged_in_user->id === $thumb['owner']) ? 'stop_mini.png' : $thumb['file_name'])));
+							echo img(($thumb['plus_18'] && !$adult_user) && !(isset($logged_in_user) && $logged_in_user->id === $thumb['owner'])
+								? array('src' => 'assets/img/stop_mini.png')
+								: array('src' => $thumb_mini_config['path'] . $thumb['file_name']));
 						?>
 					</div>
 				</div>

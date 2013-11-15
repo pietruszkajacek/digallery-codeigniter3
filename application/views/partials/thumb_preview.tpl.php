@@ -4,7 +4,7 @@
 			<div class="container-thumb-preview">
 				<div class="outer-block-thumb-preview">
 					<?php if (($preview_image->plus_18 && !$adult_user) && !(isset($logged_in_user) && $logged_in_user->id === $preview_image->user_id)) : ?>
-						<?php echo img(array('src' => $thumb_preview_config['path'] . 'stop_preview.png', 'alt' => $preview_image->title,
+						<?php echo img(array('src' => 'assets/img/stop_preview.png', 'alt' => $preview_image->title,
 									'class' => "stop18"));
 						?>
 						<div class="alert alert-block alert-error fade in alert-stop18">

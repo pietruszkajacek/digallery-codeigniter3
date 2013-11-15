@@ -5,7 +5,7 @@
 				<div class="outer-block-thumb-zoom" >
 					<?php if (($image->plus_18 && !$adult_user) && !(isset($logged_in_user) && $logged_in_user->id === $image->user_id)) : ?>
 						<?php
-							echo img(array('src' => $images_config['path'] . 'stop_preview.png', 'alt' => $image->title,
+							echo img(array('src' => 'assets/img/stop_preview.png', 'alt' => $image->title,
 								'class' => "stop18"));
 						?>
 						<div class="alert alert-block alert-error fade in alert-stop18">
