@@ -445,7 +445,7 @@ class Profile extends MY_Controller
 		$this->load->model('browse_model');
 		$this->load->model('comments_model');
 		$this->load->library('typography');
-		$this->load->helper('urllinker');		
+		$this->load->helper(array('urllinker', 'urlslug'));
 		
 		$user = $this->browse_model->get_user(intval($user_id));
 		
@@ -1430,7 +1430,7 @@ class Profile extends MY_Controller
 	
 	public function images($user_id = 0)
 	{
-		$this->load->helper('browse');
+		$this->load->helper(array('browse', 'urlslug'));
 		$this->load->model('browse_model');			
 		
 		$user = $this->browse_model->get_user(intval($user_id));
@@ -1511,7 +1511,7 @@ class Profile extends MY_Controller
 	
 	public function galleries($user_id = 0)
 	{
-		$this->load->helper('browse');
+		$this->load->helper(array('browse', 'urlslug'));
 		$this->load->model('browse_model');			
 		
 		$user = $this->browse_model->get_user(intval($user_id));

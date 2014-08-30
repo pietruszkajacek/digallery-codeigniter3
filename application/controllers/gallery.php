@@ -14,14 +14,13 @@ class Gallery extends MY_Controller
 		$this->gallery_comments_config = $this->config->item('gallery_comments', 'digallery');
 	}
 
-	public function view($gallery_id = 0, $current_image_index = 1)
+	public function view($gallery_id = 0, $current_image_index = 1, $name = '')
 	{
 		$this->load->model('browse_model');
 		$this->load->model('comments_model');
 		$this->load->model('evaluations_model');
 		$this->load->library('typography');
-		$this->load->helper('urllinker');
-		$this->load->helper('browse');
+		$this->load->helper(array('urllinker', 'urlslug', 'browse'));
 
 		if (($gallery = $this->browse_model->get_gallery(intval($gallery_id))) === FALSE)
 		{

@@ -2,7 +2,7 @@
 	<?php foreach ($thumbs_small_gallery as $thumb): ?>
 		<li class="span2 thumbnail-small">
 			<div class="thumbnail thumbnail-browse">
-				<a href="<?php echo '/gallery/view/' . $thumb['id']?>">
+				<a href="<?php echo '/gallery/view/' . $thumb['id'] . '/1/' . url_slug($thumb['name'], array('transliterate' => TRUE)) ?>">
 				<div class="container-thumb-gallery">
 					<?php if (isset($thumb['gallery_thumb_images'][1])): ?>
 						<div class="left-top-thumb-gallery">

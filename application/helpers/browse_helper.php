@@ -54,7 +54,7 @@ if ( ! function_exists('split_tags'))
 		$text = preg_replace('%(?![\'\-\%\*])[^\p{L}\p{N}]+%u', ' ', $text);
 
 		// Replace multiple whitespace or dashes
-		$text = preg_replace('%(\s){2,}%u', '\1', ($text));
+		$text = preg_replace('%(\s){2,}%u', '\1', $text);
 				
 		// Fill an array with all the words
 		$tags = array_unique(explode(' ', trim($text)));
@@ -281,3 +281,4 @@ if ( ! function_exists('create_get_params_uri'))
 		return empty($get_uri) ? '' : '?' . implode('&', $get_uri);
 	}
 }
+

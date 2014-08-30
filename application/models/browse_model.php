@@ -84,22 +84,22 @@ class Browse_model extends CI_Model
 		return $this->db->query($query)->result_array();	
 	}
 	
-	public function get_user_next_image_id($user_id, $cur_image_id)
+	public function get_user_next_image_id_name($user_id, $cur_image_id)
 	{
-		$query = "SELECT id FROM images WHERE user_id = $user_id AND id > $cur_image_id ORDER BY id ASC LIMIT 1";
+		$query = "SELECT id, title FROM images WHERE user_id = $user_id AND id > $cur_image_id ORDER BY id ASC LIMIT 1";
 		
 		$result = $this->db->query($query);
 		
-		return ($result->num_rows() > 0) ? $result->row()->id : NULL;	
+		return ($result->num_rows() > 0) ? $result->row() : NULL;
 	}
 
-	public function get_user_prev_image_id($user_id, $cur_image_id)
+	public function get_user_prev_image_id_name($user_id, $cur_image_id)
 	{
-		$query = "SELECT id FROM images WHERE user_id = $user_id AND id < $cur_image_id ORDER BY id DESC LIMIT 1";
+		$query = "SELECT id, title FROM images WHERE user_id = $user_id AND id < $cur_image_id ORDER BY id DESC LIMIT 1";
 
 		$result = $this->db->query($query);
 
-		return ($result->num_rows() > 0) ? $result->row()->id : NULL;
+		return ($result->num_rows() > 0) ? $result->row() : NULL;
 	}
 	
 	private function get_images($just_countings = FALSE, $category_id = 0, $filter = 0, $sort = 'dd', $user_id = 0, $page = 1, $page_size = 18, $search_tags = array())

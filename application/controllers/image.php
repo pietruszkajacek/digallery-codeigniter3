@@ -45,15 +45,15 @@ class Image extends MY_Controller
 	public function zoom($image_id = 0)
 	{
 		$this->load->model('browse_model');
-		$this->load->helper('browse');
+		$this->load->helper(array('browse', 'urlslug'));
 
 		if (($image = $this->browse_model->get_image(intval($image_id))) === FALSE)
 		{
 			show_error("Praca nie występuje...", 404, 'Błąd!');
 		}
 		
-		$this->data['previous_image_id'] = $this->browse_model->get_user_prev_image_id($image->user_id, $image->id);
-		$this->data['next_image_id'] = $this->browse_model->get_user_next_image_id($image->user_id, $image->id);
+		$this->data['previous_image_id_name'] = $this->browse_model->get_user_prev_image_id_name($image->user_id, $image->id);
+		$this->data['next_image_id_name'] = $this->browse_model->get_user_next_image_id_name($image->user_id, $image->id);
 		
 		$cats_uri_rows = $this->browse_model->get_cats_uri_rows($this->browse_model->build_path_cats($image->category_id, 'images'), 'images');
 		$cats_path = create_hierarchical_path(base_url() . 'browse/images/', $cats_uri_rows);		
@@ -97,14 +97,13 @@ class Image extends MY_Controller
 		}
 	}	
 	
-	public function preview($image_id = 0)
+	public function preview($image_id = 0, $name = '')
 	{
 		$this->load->model('browse_model');
 		$this->load->model('comments_model');
 		$this->load->model('evaluations_model');
 		$this->load->library('typography');
-		$this->load->helper('urllinker');
-		$this->load->helper('browse');
+		$this->load->helper(array('browse', 'urllinker', 'urlslug'));
 
 		if (($image = $this->browse_model->get_image(intval($image_id))) === FALSE)
 		{
@@ -118,8 +117,8 @@ class Image extends MY_Controller
 
 		$this->data['adult_user'] = $this->adult_user;
 		
-		$this->data['previous_image_id'] = $this->browse_model->get_user_prev_image_id($image->user_id, $image->id);
-		$this->data['next_image_id'] = $this->browse_model->get_user_next_image_id($image->user_id, $image->id);
+		$this->data['previous_image_id_name'] = $this->browse_model->get_user_prev_image_id_name($image->user_id, $image->id);
+		$this->data['next_image_id_name'] = $this->browse_model->get_user_next_image_id_name($image->user_id, $image->id);
 		
 		$all_image_comments = $this->comments_model->counts_image_comments($image_id);
 

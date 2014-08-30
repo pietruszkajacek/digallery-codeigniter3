@@ -20,7 +20,7 @@ class Browse extends MY_Controller
 		}		
 		
 		$this->load->model('browse_model');
-		$this->load->helper('common');
+		$this->load->helper(array('common', 'urlslug'));
 		
 		$this->data['thumbs_mini'] = $this->browse_model->get_thumb_images(0, 0, 'dd', 0, 1, 14);
 		
@@ -164,7 +164,7 @@ class Browse extends MY_Controller
 
 	public function images()
 	{		
-		$this->load->helper('browse');
+		$this->load->helper(array('browse', 'urlslug'));
 		$this->load->model('browse_model');
 
 		$this->data['adult_user'] = $this->adult_user;
@@ -278,7 +278,7 @@ class Browse extends MY_Controller
 		
 	public function galleries()
 	{		
-		$this->load->helper('browse');
+		$this->load->helper(array('browse', 'urlslug'));
 		$this->load->model('browse_model');
 
 		$cats_uri_rows = $this->browse_model->get_cats_uri_rows(array_slice($this->uri->segment_array(), 2), 'galleries');

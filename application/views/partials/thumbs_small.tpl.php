@@ -5,7 +5,7 @@
 				<div class="container-thumb-browse">
 					<div class="outer-block-thumb-browse-image">
 						<?php
-						echo anchor('/image/preview/' . $thumb['imgs_id'], img(array('src' => $thumb_small_config['path']
+							echo anchor('/image/preview/' . $thumb['imgs_id'] . '/' . url_slug($thumb['title'], array('transliterate' => TRUE)), img(array('src' => $thumb_small_config['path']
 									. (($thumb['plus_18'] && !$adult_user) && !(isset($logged_in_user) && $logged_in_user->id === $thumb['owner']) ? 'stop_small.png' : $thumb['file_name']), 'alt' => $thumb['title'])));
 						?>
 					</div>

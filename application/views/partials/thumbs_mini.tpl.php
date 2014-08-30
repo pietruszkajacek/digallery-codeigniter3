@@ -2,7 +2,7 @@
 	<?php foreach ($thumbs_mini as $thumb): ?>
 		<li class="span1 thumbnail-mini">
 			<div class="thumbnail">
-				<a href="<?php echo '/image/preview/' . $thumb['imgs_id']; ?>" alt="<?php echo $thumb['title']; ?>">
+				<a href="<?php echo '/image/preview/' . $thumb['imgs_id'] . '/' . url_slug($thumb['title'], array('transliterate' => TRUE)); ?>" alt="<?php echo $thumb['title']; ?>">
 				<div class="container-thumb-mini">
 					<div class="outer-block-thumb-mini">
 						<?php

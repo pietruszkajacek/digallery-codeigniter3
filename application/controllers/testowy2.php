@@ -313,4 +313,13 @@ function split_words($text, $idx)
 	{
 		$this->create_ses_stop18($value);
 	}
+	
+	public function normalize_url()
+	{
+		$this->load->helper('browse');
+		$text = 'ąąą-śćkk';
+		
+		//echo clean($text);
+		echo url_slug($text);
+	}
 }

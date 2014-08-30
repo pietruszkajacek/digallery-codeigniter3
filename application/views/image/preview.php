@@ -2,18 +2,20 @@
 	<div class="span11">
 		<?php $this->load->view('partials/thumb_preview.tpl.php');?>
 		<ul class="pager">
-			<?php if (isset($previous_image_id)) :?>
+			<?php if (isset($previous_image_id_name)) :?>
 				<li class="previous">
-					<?php echo anchor("image/preview/$previous_image_id", '&larr; poprzednia', array()); ?>
+					<?php echo anchor("image/preview/{$previous_image_id_name->id}" . '/' . url_slug($previous_image_id_name->title, array('transliterate' => TRUE)), 
+							'&larr; poprzednia', array()); ?>
 				</li>				
 			<?php else : ?>
 				<li class="previous disabled">
 					<?php echo anchor("#", '&larr; poprzednia', array('onclick' => 'return false;' )); ?>
 				</li>							
 			<?php endif; ?>
-			<?php if (isset($next_image_id)) :?>
+			<?php if (isset($next_image_id_name)) :?>
 				<li class="next">
-					<?php echo anchor("image/preview/$next_image_id", 'następna &rarr;', array()); ?>
+					<?php echo anchor("image/preview/{$next_image_id_name->id}" . '/' . url_slug($next_image_id_name->title, array('transliterate' => TRUE)), 
+							'następna &rarr;', array()); ?>
 				</li>				
 			<?php else : ?>
 				<li class="next disabled">

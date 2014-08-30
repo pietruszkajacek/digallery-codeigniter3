@@ -17,7 +17,7 @@
 							</p>
 						</div>							
 					<?php else : ?>
-						<?php echo anchor("/image/zoom/{$preview_image->id}", img(array('src' => $thumb_preview_config['path'] . $preview_image->file_name, 'alt' => $preview_image->title))); ?>
+						<?php echo anchor("/image/zoom/{$preview_image->id}" . '/' . url_slug($preview_image->title, array('transliterate' => TRUE)), img(array('src' => $thumb_preview_config['path'] . $preview_image->file_name, 'alt' => $preview_image->title))); ?>
 					<?php endif; ?>
 				</div>
 			</div>
