@@ -10,7 +10,8 @@ class Comments extends CI_Controller
 
 		$this->config->load('digallery', TRUE);
 		$this->load->database();
-		$this->load->library(array('session','ion_auth', 'form_validation', 'typography'));
+		$this->load->driver('session');
+		$this->load->library(array('ion_auth', 'form_validation', 'typography'));
 		$this->load->helper(array('url', 'html', 'urllinker'));
 		$this->lang->load('digallery', 'polish');
 

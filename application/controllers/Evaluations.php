@@ -10,7 +10,8 @@ class Evaluations extends CI_Controller
 
 		$this->config->load('digicomm', TRUE);
 		$this->load->database();
-		$this->load->library(array('session','ion_auth', 'form_validation'));
+		$this->load->driver('session');
+		$this->load->library(array('ion_auth', 'form_validation'));
 		$this->load->helper(array('url', 'html'));
 		$this->lang->load('dc', 'polish');
 
