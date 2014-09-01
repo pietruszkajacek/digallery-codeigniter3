@@ -18,7 +18,7 @@
  *
  * @package		CodeIgniter
  * @author		EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2012, EllisLab, Inc. (http://ellislab.com/)
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
  * @license		http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * @link		http://codeigniter.com
  * @since		Version 3.0
@@ -44,6 +44,7 @@ class CI_Cache_redis extends CI_Driver
 	 * @var	array
 	 */
 	protected static $_default_config = array(
+		'socket_type' => 'tcp',
 		'host' => '127.0.0.1',
 		'password' => NULL,
 		'port' => 6379,
@@ -57,17 +58,31 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	protected $_redis;
 
+	/**
+	 * An internal cache for storing keys of serialized values.
+	 *
+	 * @var	array
+	 */
+	protected $_serialized = array();
+
 	// ------------------------------------------------------------------------
 
 	/**
 	 * Get cache
 	 *
-	 * @param	string	Cache key identifier
+	 * @param	string	Cache ID
 	 * @return	mixed
 	 */
 	public function get($key)
 	{
-		return $this->_redis->get($key);
+		$value = $this->_redis->get($key);
+
+		if ($value !== FALSE && isset($this->_serialized[$key]))
+		{
+			return unserialize($value);
+		}
+
+		return $value;
 	}
 
 	// ------------------------------------------------------------------------
@@ -75,16 +90,33 @@ class CI_Cache_redis extends CI_Driver
 	/**
 	 * Save cache
 	 *
-	 * @param	string	Cache key identifier
-	 * @param	mixed	Data to save
-	 * @param	int	Time to live
-	 * @return	bool
+	 * @param	string	$id	Cache ID
+	 * @param	mixed	$data	Data to save
+	 * @param	int	$ttl	Time to live in seconds
+	 * @param	bool	$raw	Whether to store the raw value (unused)
+	 * @return	bool	TRUE on success, FALSE on failure
 	 */
-	public function save($key, $value, $ttl = NULL)
+	public function save($id, $data, $ttl = 60, $raw = FALSE)
 	{
+		if (is_array($data) OR is_object($data))
+		{
+			if ( ! $this->_redis->sAdd('_ci_redis_serialized', $id))
+			{
+				return FALSE;
+			}
+
+			isset($this->_serialized[$id]) OR $this->_serialized[$id] = TRUE;
+			$data = serialize($data);
+		}
+		elseif (isset($this->_serialized[$id]))
+		{
+			$this->_serialized[$id] = NULL;
+			$this->_redis->sRemove('_ci_redis_serialized', $id);
+		}
+
 		return ($ttl)
-			? $this->_redis->setex($key, $ttl, $value)
-			: $this->_redis->set($key, $value);
+			? $this->_redis->setex($id, $ttl, $data)
+			: $this->_redis->set($id, $data);
 	}
 
 	// ------------------------------------------------------------------------
@@ -97,7 +129,46 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function delete($key)
 	{
-		return ($this->_redis->delete($key) === 1);
+		if ($this->_redis->delete($key) !== 1)
+		{
+			return FALSE;
+		}
+
+		if (isset($this->_serialized[$key]))
+		{
+			$this->_serialized[$key] = NULL;
+			$this->_redis->sRemove('_ci_redis_serialized', $key);
+		}
+
+		return TRUE;
+	}
+
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Increment a raw value
+	 *
+	 * @param	string	$id	Cache ID
+	 * @param	int	$offset	Step/value to add
+	 * @return	mixed	New value on success or FALSE on failure
+	 */
+	public function increment($id, $offset = 1)
+	{
+		return $this->_redis->incr($id, $offset);
+	}
+
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Decrement a raw value
+	 *
+	 * @param	string	$id	Cache ID
+	 * @param	int	$offset	Step/value to reduce by
+	 * @return	mixed	New value on success or FALSE on failure
+	 */
+	public function decrement($id, $offset = 1)
+	{
+		return $this->_redis->decr($id, $offset);
 	}
 
 	// ------------------------------------------------------------------------
@@ -163,12 +234,11 @@ class CI_Cache_redis extends CI_Driver
 	{
 		if (extension_loaded('redis'))
 		{
-			$this->_setup_redis();
-			return TRUE;
+			return $this->_setup_redis();
 		}
 		else
 		{
-			log_message('error', 'The Redis extension must be loaded to use Redis cache.');
+			log_message('debug', 'The Redis extension must be loaded to use Redis cache.');
 			return FALSE;
 		}
 	}
@@ -200,23 +270,45 @@ class CI_Cache_redis extends CI_Driver
 
 		try
 		{
-			$this->_redis->connect($config['host'], $config['port'], $config['timeout']);
+			if ($config['socket_type'] === 'unix')
+			{
+				$success = $this->_redis->connect($config['socket']);
+			}
+			else // tcp socket
+			{
+				$success = $this->_redis->connect($config['host'], $config['port'], $config['timeout']);
+			}
+
+			if ( ! $success)
+			{
+				log_message('debug', 'Cache: Redis connection refused. Check the config.');
+				return FALSE;
+			}
 		}
 		catch (RedisException $e)
 		{
-			show_error('Redis connection refused. ' . $e->getMessage());
+			log_message('debug', 'Cache: Redis connection refused ('.$e->getMessage().')');
+			return FALSE;
 		}
 
 		if (isset($config['password']))
 		{
 			$this->_redis->auth($config['password']);
 		}
+
+		// Initialize the index of serialized values.
+		$serialized = $this->_redis->sMembers('_ci_redis_serialized');
+		if ( ! empty($serialized))
+		{
+			$this->_serialized = array_flip($serialized);
+		}
+
+		return TRUE;
 	}
 
 	// ------------------------------------------------------------------------
 
 	/**
-
 	 * Class destructor
 	 *
 	 * Closes the connection to Redis if present.

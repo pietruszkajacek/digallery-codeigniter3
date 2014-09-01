@@ -18,7 +18,7 @@
  *
  * @package		CodeIgniter
  * @author		EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2012, EllisLab, Inc. (http://ellislab.com/)
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
  * @license		http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * @link		http://codeigniter.com
  * @since		Version 3.0
@@ -69,23 +69,14 @@ class CI_DB_ibase_driver extends CI_DB {
 	/**
 	 * Non-persistent database connection
 	 *
+	 * @param	bool	$persistent
 	 * @return	resource
 	 */
-	public function db_connect()
+	public function db_connect($persistent = FALSE)
 	{
-		return @ibase_connect($this->hostname.':'.$this->database, $this->username, $this->password, $this->char_set);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Persistent database connection
-	 *
-	 * @return	resource
-	 */
-	public function db_pconnect()
-	{
-		return @ibase_pconnect($this->hostname.':'.$this->database, $this->username, $this->password, $this->char_set);
+		return ($persistent === TRUE)
+			? ibase_pconnect($this->hostname.':'.$this->database, $this->username, $this->password, $this->char_set)
+			: ibase_connect($this->hostname.':'.$this->database, $this->username, $this->password, $this->char_set);
 	}
 
 	// --------------------------------------------------------------------
@@ -124,7 +115,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	protected function _execute($sql)
 	{
-		return @ibase_query($this->conn_id, $sql);
+		return ibase_query($this->conn_id, $sql);
 	}
 
 	// --------------------------------------------------------------------
@@ -148,7 +139,7 @@ class CI_DB_ibase_driver extends CI_DB {
 		// even if the queries produce a successful result.
 		$this->_trans_failure = ($test_mode === TRUE);
 
-		$this->_ibase_trans = @ibase_trans($this->conn_id);
+		$this->_ibase_trans = ibase_trans($this->conn_id);
 
 		return TRUE;
 	}
@@ -168,7 +159,7 @@ class CI_DB_ibase_driver extends CI_DB {
 			return TRUE;
 		}
 
-		return @ibase_commit($this->_ibase_trans);
+		return ibase_commit($this->_ibase_trans);
 	}
 
 	// --------------------------------------------------------------------
@@ -186,39 +177,7 @@ class CI_DB_ibase_driver extends CI_DB {
 			return TRUE;
 		}
 
-		return @ibase_rollback($this->_ibase_trans);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Escape String
-	 *
-	 * @param	string	$str
-	 * @param	bool	$like	Whether or not the string will be used in a LIKE condition
-	 * @return	string
-	 */
-	public function escape_str($str, $like = FALSE)
-	{
-		if (is_array($str))
-		{
-			foreach ($str as $key => $val)
-			{
-				$str[$key] = $this->escape_str($val, $like);
-			}
-
-			return $str;
-		}
-
-		// escape LIKE condition wildcards
-		if ($like === TRUE)
-		{
-			return str_replace(array($this->_like_escape_chr, '%', '_'),
-						array($this->_like_escape_chr.$this->_like_escape_chr, $this->_like_escape_chr.'%', $this->_like_escape_chr.'_'),
-						$str);
-		}
-
-		return $str;
+		return ibase_rollback($this->_ibase_trans);
 	}
 
 	// --------------------------------------------------------------------
@@ -230,7 +189,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	public function affected_rows()
 	{
-		return @ibase_affected_rows($this->conn_id);
+		return ibase_affected_rows($this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -260,11 +219,11 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	protected function _list_tables($prefix_limit = FALSE)
 	{
-		$sql = 'SELECT "RDB$RELATION_NAME" FROM "RDB$RELATIONS" WHERE "RDB$RELATION_NAME" NOT LIKE \'RDB$%\' AND "RDB$RELATION_NAME" NOT LIKE \'MON$%\'';
+		$sql = 'SELECT TRIM("RDB$RELATION_NAME") AS TABLE_NAME FROM "RDB$RELATIONS" WHERE "RDB$RELATION_NAME" NOT LIKE \'RDB$%\' AND "RDB$RELATION_NAME" NOT LIKE \'MON$%\'';
 
 		if ($prefix_limit !== FALSE && $this->dbprefix !== '')
 		{
-			return $sql.' AND "RDB$RELATION_NAME" LIKE \''.$this->escape_like_str($this->dbprefix)."%' "
+			return $sql.' AND TRIM("RDB$RELATION_NAME") AS TABLE_NAME LIKE \''.$this->escape_like_str($this->dbprefix)."%' "
 				.sprintf($this->_like_escape_str, $this->_like_escape_chr);
 		}
 
@@ -283,7 +242,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	protected function _list_columns($table = '')
 	{
-		return 'SELECT "RDB$FIELD_NAME" FROM "RDB$RELATION_FIELDS" WHERE "RDB$RELATION_NAME" = '.$this->escape($table);
+		return 'SELECT TRIM("RDB$FIELD_NAME") AS COLUMN_NAME FROM "RDB$RELATION_FIELDS" WHERE "RDB$RELATION_NAME" = '.$this->escape($table);
 	}
 
 	// --------------------------------------------------------------------
@@ -421,7 +380,7 @@ class CI_DB_ibase_driver extends CI_DB {
 				.($this->qb_offset ? $this->qb_offset.' TO '.($this->qb_limit + $this->qb_offset) : $this->qb_limit);
 		}
 
-		return preg_replace('`SELECT`i', 'SELECT '.$select, $sql);
+		return preg_replace('`SELECT`i', 'SELECT '.$select, $sql, 1);
 	}
 
 	// --------------------------------------------------------------------
@@ -433,7 +392,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	protected function _close()
 	{
-		@ibase_close($this->conn_id);
+		ibase_close($this->conn_id);
 	}
 
 }

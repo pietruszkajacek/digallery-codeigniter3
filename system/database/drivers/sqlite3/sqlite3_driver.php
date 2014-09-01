@@ -18,7 +18,7 @@
  *
  * @package		CodeIgniter
  * @author		EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2012, EllisLab, Inc. (http://ellislab.com/)
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
  * @license		http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -63,10 +63,16 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	/**
 	 * Non-persistent database connection
 	 *
-	 * @return	object	type SQLite3
+	 * @param	bool	$persistent
+	 * @return	SQLite3
 	 */
-	public function db_connect()
+	public function db_connect($persistent = FALSE)
 	{
+		if ($persistent)
+		{
+			log_message('debug', 'SQLite3 doesn\'t support persistent connections');
+		}
+
 		try
 		{
 			return ( ! $this->password)
@@ -77,19 +83,6 @@ class CI_DB_sqlite3_driver extends CI_DB {
 		{
 			return FALSE;
 		}
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Persistent database connection
-	 *
-	 * @return  object	type SQLite3
-	 */
-	public function db_pconnect()
-	{
-		log_message('debug', 'SQLite3 doesn\'t support persistent connections');
-		return $this->db_connect();
 	}
 
 	// --------------------------------------------------------------------
@@ -189,35 +182,14 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Escape String
+	 * Platform-dependant string escape
 	 *
-	 * @param	string	$str
-	 * @param	bool	$like	Whether or not the string will be used in a LIKE condition
+	 * @param	string
 	 * @return	string
 	 */
-	public function escape_str($str, $like = FALSE)
+	protected function _escape_str($str)
 	{
-		if (is_array($str))
-		{
-			foreach ($str as $key => $val)
-			{
-				$str[$key] = $this->escape_str($val, $like);
-			}
-
-			return $str;
-		}
-
-		$str = $this->conn_id->escapeString(remove_invisible_characters($str));
-
-		// escape LIKE condition wildcards
-		if ($like === TRUE)
-		{
-			return str_replace(array($this->_like_escape_chr, '%', '_'),
-						array($this->_like_escape_chr.$this->_like_escape_chr, $this->_like_escape_chr.'%', $this->_like_escape_chr.'_'),
-						$str);
-		}
-
-		return $str;
+		return $this->conn_id->escapeString($str);
 	}
 
 	// --------------------------------------------------------------------
