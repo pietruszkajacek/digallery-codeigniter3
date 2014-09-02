@@ -263,7 +263,7 @@ class Profile extends MY_Controller
 			//Pobierz dane zalogowanego użytkownika
 			$user = $this->ion_auth->user()->row();
 			
-			if ($this->uri->segment(3) !== FALSE)
+			if (!is_null($this->uri->segment(3)))
 			{
 				$uri_gallery_id = intval($this->uri->segment(3));
 				$gallery = $this->browse_model->get_gallery($uri_gallery_id);
@@ -676,7 +676,7 @@ class Profile extends MY_Controller
 			//Pobierz dane zalogowanego użytkownika
 			$user = $this->ion_auth->user()->row();
 			
-			if ($this->uri->segment(3) !== FALSE)
+			if (!is_null($this->uri->segment(3)))
 			{
 				$uri_image_id = intval($this->uri->segment(3));
 				$image = $this->browse_model->get_image($uri_image_id);
@@ -1440,7 +1440,7 @@ class Profile extends MY_Controller
 			show_error("Użytkownik nie istnieje...", 404, 'Błąd!');
 		}
 		
-		$current_page = $this->input->get('page') === FALSE ? 1 : intval($this->input->get('page'));
+		$current_page = is_null($this->input->get('page')) ? 1 : intval($this->input->get('page'));
 
 		$filter = get_filter_param($this->input->get('filter'));
 		$sort = get_sort_param($this->input->get('sort'));
@@ -1521,7 +1521,7 @@ class Profile extends MY_Controller
 			show_error("Użytkownik nie istnieje...", 404, 'Błąd!');
 		}
 		
-		$current_page = $this->input->get('page') === FALSE ? 1 : intval($this->input->get('page'));
+		$current_page = is_null($this->input->get('page')) ? 1 : intval($this->input->get('page'));
 
 		$filter = get_filter_param($this->input->get('filter'));
 		$sort = get_sort_param($this->input->get('sort'));
@@ -1609,7 +1609,7 @@ class Profile extends MY_Controller
 			show_error("Użytkownik nie istnieje...", 404, 'Błąd!');
 		}
 		
-		if (is_numeric($this->uri->rsegment(4)) || $this->uri->rsegment(4) === FALSE)
+		if (is_numeric($this->uri->rsegment(4)) || is_null($this->uri->rsegment(4)))
 		{
 			$page_segment = 4;
 			$comments_type = 'all';

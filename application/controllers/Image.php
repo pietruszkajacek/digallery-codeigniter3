@@ -98,13 +98,13 @@ class Image extends MY_Controller
 	}	
 	
 	public function preview($image_id = 0, $name = '')
-	{
+	{	
 		$this->load->model('browse_model');
 		$this->load->model('comments_model');
 		$this->load->model('evaluations_model');
 		$this->load->library('typography');
 		$this->load->helper(array('browse', 'urllinker', 'urlslug'));
-
+	
 		if (($image = $this->browse_model->get_image(intval($image_id))) === FALSE)
 		{
 			show_error("Praca nie występuje...", 404, 'Błąd!');

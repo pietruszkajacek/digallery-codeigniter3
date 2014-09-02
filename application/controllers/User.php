@@ -744,7 +744,7 @@ class User extends MY_Controller
 
 	function _valid_csrf_nonce()
 	{
-		if ($this->input->post($this->session->flashdata('csrfkey')) !== FALSE &&
+		if (!is_null($this->input->post($this->session->flashdata('csrfkey'))) &&
 				$this->input->post($this->session->flashdata('csrfkey')) == $this->session->flashdata('csrfvalue'))
 		{
 			return TRUE;

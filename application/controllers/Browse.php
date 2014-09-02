@@ -194,7 +194,7 @@ class Browse extends MY_Controller
 		}
 
 		$page_size = 18;
-		$current_page = $this->input->get('page') === FALSE ? 1 : intval($this->input->get('page'));
+		$current_page = is_null($this->input->get('page')) ? 1 : intval($this->input->get('page'));
 
 		if ($current_page < 1)
 		{
@@ -308,7 +308,7 @@ class Browse extends MY_Controller
 		}
 
 		$page_size = 18;
-		$current_page = $this->input->get('page') === FALSE ? 1 : intval($this->input->get('page'));
+		$current_page = is_null($this->input->get('page')) ? 1 : intval($this->input->get('page'));
 
 		if ($current_page < 1)
 		{
