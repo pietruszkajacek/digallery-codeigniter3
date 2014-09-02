@@ -1,5 +1,10 @@
 <div class="jumbotron-wrapper">
-	<div class="container">
+	<div class="container" id="jumbotron-container">
+		<div class="row">
+			<div class="span15">
+				<?php $this->load->view('partials/message_error.tpl.php'); ?>
+			</div>
+		</div>
 		<div class="row">
 			<div class="span15">
 				<div class="jumbotron">
@@ -18,12 +23,16 @@
 	</div>
 </div>
 <div class="container">
-	<div class="span14 thumbs-mini-images-row">
-		<?php $this->load->view('partials/thumbs_mini.tpl.php'); ?>
+	<div class="row">
+		<div class="span14 thumbs-mini-images-row">
+			<?php $this->load->view('partials/thumbs_mini.tpl.php'); ?>
+		</div>
 	</div>
 	<hr>
-	<div class="span14 thumbs-gallery-row">
-		<?php $this->load->view('partials/thumbs_galleries.tpl.php'); ?>	
-	</div>
+	<div class="row">
+		<div class="span14 thumbs-gallery-row">
+			<?php $this->load->view('partials/thumbs_galleries.tpl.php'); ?>	
+		</div>
+	</div>	
 </div>
 

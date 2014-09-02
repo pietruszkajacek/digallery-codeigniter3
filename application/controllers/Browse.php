@@ -16,7 +16,7 @@ class Browse extends MY_Controller
 		if ($this->ion_auth->logged_in())
 		{
 			//gdy zalogowany
-			redirect($this->config->item('base_url') . 'browse/images/', 'refresh');	
+			redirect($this->config->item('base_url') . 'browse/images/', 'refresh');
 		}		
 		
 		$this->load->model('browse_model');

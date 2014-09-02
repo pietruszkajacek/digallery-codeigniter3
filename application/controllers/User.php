@@ -727,6 +727,8 @@ class User extends MY_Controller
 		//wylogowanie użytkownika
 		$logout = $this->ion_auth->logout();
 
+		$this->session->set_flashdata(array('type' => 'info', 'msg' => $this->ion_auth->messages()));	
+		
 		//przekierowanie na główną stronę
 		redirect('', 'refresh');
 	}
