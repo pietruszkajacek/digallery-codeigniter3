@@ -295,7 +295,7 @@ class Browse_model extends CI_Model
 		$this->db->where('short_name_cat', current($segs));
 		$query = $this->db->get($table_name);
 
-		if ($query->num_rows > 0)
+		if ($query->num_rows() > 0)
 		{
 			foreach($query->result_array() as $node)
 			{
@@ -321,7 +321,7 @@ class Browse_model extends CI_Model
 			$this->db->where('parent_cat_id', $parent_id);
 			$query = $this->db->get($table_name);
 
-			if ($query->num_rows > 0)
+			if ($query->num_rows() > 0)
 			{
 				$row = $query->row_array();
 				$parent_id = $row['id'];
@@ -395,7 +395,7 @@ class Browse_model extends CI_Model
 			$this->db->where('id', $category_id);
 			$query = $this->db->get($table_name);
 
-			if ($query->num_rows > 0)
+			if ($query->num_rows() > 0)
 			{
 				$row = $query->row();
 				$result[] = $row->short_name_cat;
@@ -419,9 +419,9 @@ class Browse_model extends CI_Model
 		$this->db->where('id', $image_id);
 		$query = $this->db->get('images');
 
-		if ($query->num_rows > 0)
+		if ($query->num_rows() > 0)
 		{
-			return  $query->row();
+			return $query->row();
 		}
 		else
 		{
@@ -434,7 +434,7 @@ class Browse_model extends CI_Model
 		$this->db->where('id', $user_id);
 		$query = $this->db->get('users');
 
-		if ($query->num_rows > 0)
+		if ($query->num_rows() > 0)
 		{
 			return $query->row();
 		}
@@ -449,7 +449,7 @@ class Browse_model extends CI_Model
 		$this->db->where('id', $user_id);
 		$query = $this->db->get('users');
 
-		if ($query->num_rows > 0)
+		if ($query->num_rows() > 0)
 		{
 			return $query->row();
 		}
@@ -1003,7 +1003,7 @@ class Browse_model extends CI_Model
 		$this->db->where('id', $gallery_id);
 		$query = $this->db->get('galleries');
 
-		if ($query->num_rows > 0)
+		if ($query->num_rows() > 0)
 		{
 			return  $query->row();
 		}
