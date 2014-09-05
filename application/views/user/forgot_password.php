@@ -28,7 +28,7 @@
 			</div>
 		<?php else:?>
 			<div class="control-group<?php echo $control_groups['email'] ?>">
-				<p>Aby zresetować hasło, wpisz swoją nazwę użytkownika konta Digicomm (Twój adres email w Digicomm.pl)</p>
+				<p>Aby zresetować hasło, wpisz swoją nazwę użytkownika konta digallery.pl (Twój adres email w digallery.pl)</p>
 				<?php echo form_label($email_label['text'], $email_label['for'], $email_label['attributes']); ?>
 				<div class="controls">
 					<?php echo form_input($email); ?>

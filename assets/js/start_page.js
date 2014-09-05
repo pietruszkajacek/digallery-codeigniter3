@@ -68,6 +68,7 @@ function register_ajax( event ) {
 					.attr( 'name', Object.keys( data.csrf_key )[0] )
 					.attr( 'value', data.csrf_key[Object.keys( data.csrf_key )[0]] );
 
+
 			$( 'input', '.jumbotron' ).focus( function () {
 				//$button_submit.popover( 'hide' );
 				$button_submit.popover( 'destroy' );

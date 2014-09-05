@@ -76,7 +76,7 @@ class User extends MY_Controller
 								->set_output(json_encode(array("status" => "1")));
 					}
 					else
-					{					
+					{
 						$this->output
 								->set_content_type('application/json')
 								->set_output(json_encode(array(
@@ -470,6 +470,7 @@ class User extends MY_Controller
 			'img_url' => $this->config->item('base_url') . '/captcha/',
 			'img_width' => 280,
 			'img_height' => 30,
+			'expiration' => $expiration,
 		);
 
 		$cap = create_captcha($vals);
@@ -700,7 +701,9 @@ class User extends MY_Controller
 					{
 						// jeśli udało zmienić się hasło
 						$this->session->set_flashdata(array('type' => 'info', 'msg' => $this->ion_auth->messages()));
-						$this->logout();
+
+						//przekierowanie na stronę logowania
+						redirect('user/login/', 'refresh');
 					}
 					else
 					{

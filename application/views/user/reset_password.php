@@ -2,7 +2,7 @@
 	<div class="span11 offset2">
 		<?php $this->load->view('partials/message_error.tpl.php');?>
 		<?php $this->load->view('partials/validation_error.tpl.php');?>
-		<h1>Reset hasła <small>Resetowanie hasła</small></h1>
+		<h3>Reset hasła <small>Resetowanie hasła</small></h3>
 		<hr>
 		<?php echo form_open('user/reset_password/' . $code, $form_attr); ?>
 		<div class="control-group<?php echo $control_groups['new'] ?>">

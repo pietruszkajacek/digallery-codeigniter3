@@ -15,7 +15,7 @@ function init_ajax_signin_form_submit()
 
 		/* stop form from submitting normally */
 		event.preventDefault();
-
+		
 		var $form = $(this),
 			url = $form.attr('action');
 
