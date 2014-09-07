@@ -11,8 +11,6 @@ $(document).ready(function () {
 		var href_target = $(event.target).attr('href');
 		var page = 1;
 		
-		alert(href_target);
-		
 		if (href_target !== '#')
 		{
 			page = href_target[2];
