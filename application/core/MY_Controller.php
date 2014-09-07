@@ -71,7 +71,7 @@ class MY_Controller extends CI_Controller
 			$this->data['nav_bar_top']['email'] = array(
 				'name' => 'email',
 				'id' => 'email',
-				'class' => 'span4',
+				'class' => 'form-control',
 				'type' => 'text',
 			);
 
@@ -85,7 +85,7 @@ class MY_Controller extends CI_Controller
 			$this->data['nav_bar_top']['password'] = array(
 				'name' => 'password',
 				'id' => 'password',
-				'class' => 'span4',
+				'class' => 'form-control',
 				'type' => 'password',
 			);
 

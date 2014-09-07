@@ -22,7 +22,7 @@ class Browse extends MY_Controller
 		$this->load->model('browse_model');
 		$this->load->helper(array('common', 'urlslug'));
 		
-		$this->data['thumbs_mini'] = $this->browse_model->get_thumb_images(0, 0, 'dd', 0, 1, 14);
+		$this->data['thumbs_mini'] = $this->browse_model->get_thumb_images(0, 0, 'dd', 0, 1, 15);
 		
 		$this->data['thumbs_small_gallery'] = $this->browse_model->get_thumb_galleries(0, 0, 'dd', 0, 1, 7);
 		
