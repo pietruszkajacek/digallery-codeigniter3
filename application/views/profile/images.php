@@ -10,7 +10,7 @@
 			<?php $this->load->view('partials/dropdown_menu_filter.tpl.php');?>
 			<?php $this->load->view('partials/dropdown_menu_sort.tpl.php');?>
 		</ul>
-		<div class="profile-images-galleries">
+		<div class="profile-browse-images">
 			<?php $this->load->view('partials/thumbs_small.tpl.php');?>
 			<?php if (!count($thumbs_small)) : ?>
 				<div class="alert alert-info">

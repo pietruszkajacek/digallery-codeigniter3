@@ -2,7 +2,7 @@
 	<?php foreach ($thumbs_small as $thumb): ?>
 		<li class="span2 thumbnail-small">
 			<div class="thumbnail thumbnail-browse">
-				<div class="container-thumb-browse">
+				<div class="container-thumb-browse-image">
 					<div class="outer-block-thumb-browse-image">
 						<?php
 							echo anchor('/image/preview/' . $thumb['imgs_id'] . '/' . url_slug($thumb['title'], array('transliterate' => TRUE)), img(array('src' => $thumb_small_config['path']

@@ -6,7 +6,7 @@ $(function() {
 			categories: [],
 			category_id: null,
 			select_width: 280,
-			select_height: 150,
+			select_height: 160,
 			max_width: 560,
 			height: 366,
 			

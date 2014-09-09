@@ -50,25 +50,25 @@
 		<?php $this->load->view('partials/comments.tpl.php');?>
 	</div>
 	<div class="span4">
-		<div>
-		<h5>Ostatnio dodane prace:</h5>
-		<hr class="average-margin">
-		<?php $this->load->view('partials/thumbs_mini.tpl.php');?>
-		<?php if (count($thumbs_mini) > 0): ?>
-			<a class="btn btn-small pull-right" href="<?php echo "/profile/{$user->id}/images/";?>">Więcej</a>
-		<?php else: ?>
-			Brak prac.
-		<?php endif; ?>
+		<div class="last-added-images">
+			<h5>Ostatnio dodane prace:</h5>
+			<hr class="average-margin">
+			<?php $this->load->view('partials/thumbs_mini.tpl.php'); ?>
+			<?php if (count($thumbs_mini) > 0): ?>
+				<a class="btn btn-small pull-right" href="<?php echo "/profile/{$user->id}/images/"; ?>">Więcej</a>
+			<?php else: ?>
+				Brak prac.
+			<?php endif; ?>
 		</div>
-		<div class="clearfix"></div>
-		<h5>Ostatnio utworzone galerie:</h5>
-		<hr class="average-margin">
-		<?php $this->load->view('partials/thumbs_galleries.tpl.php'); ?>
-		<?php if (count($thumbs_small_gallery) > 0): ?>
-			<a class="btn btn-small pull-right" href="<?php echo "/profile/{$user->id}/galleries/";?>">Więcej</a>
-		<?php else: ?>
-			Brak galerii.
-		<?php endif; ?>
-		<div class="clearfix"></div>
+		<div class="last-added-galleries">
+			<h5>Ostatnio utworzone galerie:</h5>
+			<hr class="average-margin">
+			<?php $this->load->view('partials/thumbs_galleries.tpl.php'); ?>
+			<?php if (count($thumbs_small_gallery) > 0): ?>
+				<a class="btn btn-small pull-right" href="<?php echo "/profile/{$user->id}/galleries/"; ?>">Więcej</a>
+			<?php else: ?>
+				Brak galerii.
+			<?php endif; ?>
+		</div>
 	</div>
 </div>

@@ -5,26 +5,23 @@
 			<div class="pull-right"><h4><em><?php echo  '(' . $current_image_index . ' / ' . count($gallery_images) . ')'; ?></em></h4></div>
 		</div>
 		<div class="jcarousel-wrapper">
-		<div class="jcarousel" data-jcar-start="<?php echo $current_image_index; ?>">
-			<ul class="thumbnails">
-				<?php foreach ($gallery_images as $gallery_image): ?>
-					<li class="span1">
-						<div class="thumbnail thumbnail-mini">
-							<div class="container-thumb-mini">
-								<div class="outer-block-thumb-mini">
-									<?php 
-										echo anchor("gallery/view/{$gallery->id}/" . ($gallery_image->order + 1) . '/' . url_slug($gallery->name, array('transliterate' => TRUE)), 	
-												img(($gallery_image->plus_18 && !$adult_user) && !(isset($logged_in_user) && $logged_in_user->id === $gallery_image->user_id) 
-														? array('src' => 'assets/img/stop_mini.png')
-														: array('src' => $thumb_mini_config['path'] . $gallery_image->file_name)));
-									?>
+			<div class="jcarousel" data-jcar-start="<?php echo $current_image_index; ?>">
+				<ul class="thumbnails">
+					<?php foreach ($gallery_images as $gallery_image): ?>
+						<li class="span1 thumbnail-mini">
+							<div class="thumbnail">
+								<div class="container-thumb-mini">
+									<div class="outer-block-thumb-mini">
+										<?php
+										echo anchor("gallery/view/{$gallery->id}/" . ($gallery_image->order + 1) . '/' . url_slug($gallery->name, array('transliterate' => TRUE)), img(($gallery_image->plus_18 && !$adult_user) && !(isset($logged_in_user) && $logged_in_user->id === $gallery_image->user_id) ? array('src' => 'assets/img/stop_mini.png') : array('src' => $thumb_mini_config['path'] . $gallery_image->file_name)));
+										?>
+									</div>
 								</div>
 							</div>
-						</div>
-					</li>
-				<?php endforeach; ?>
-			</ul>
-		</div>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
 			<div class="jcarousel-prev-horizontal">
 				<?php echo anchor("#", '&larr;', array('id' => 'jcarousel-prev')); ?>
 			</div>

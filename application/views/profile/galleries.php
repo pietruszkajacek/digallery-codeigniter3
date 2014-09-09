@@ -9,7 +9,7 @@
 		<ul class="nav nav-pills">
 			<?php $this->load->view('partials/dropdown_menu_filter.tpl.php');?>
 		</ul>
-		<div class="profile-images-galleries">
+		<div class="profile-browse-galleries">
 			<?php $this->load->view('partials/thumbs_galleries.tpl.php'); ?>
 			<?php if (!count($thumbs_small_gallery)) : ?>
 				<div class="alert alert-info">

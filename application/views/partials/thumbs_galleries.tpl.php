@@ -41,12 +41,12 @@
 						</div>
 					<?php endif; ?>	
 				</div>
-				<div class="container-thumb-browse">
-					<div class="outer-block-thumb-browse-gallery">
+				<div class="container-thumb-browse-image">
+					<div class="outer-block-thumb-browse-image">
 						<?php
 							echo img(($thumb['gallery_thumb_images'][0]['plus_18'] && !$adult_user)	&& !(isset($logged_in_user) && $logged_in_user->id === $thumb['owner'])
-									? array('src' => 'assets/img/stop_mini.png')
-									: array('src' => $thumb_mini_config['path'] . $thumb['gallery_thumb_images'][0]['file_name']));						
+									? array('src' => 'assets/img/stop_mini.png', 'class' => 'bordered')
+									: array('src' => $thumb_mini_config['path'] . $thumb['gallery_thumb_images'][0]['file_name'], 'class' => 'bordered'));						
 						?>
 					</div>
 				</div>

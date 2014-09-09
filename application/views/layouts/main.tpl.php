@@ -33,10 +33,14 @@
 	
 	<?php echo $header_bar; ?>
 	
-	<div <?php echo (isset($no_container_class)) ? '' : 'class="container" id="main-content"'; ?>>
+	<?php if (isset($no_container_class)) : ?>
 		<?php echo $content; ?>
-	</div>
-
+	<?php else : ?>
+		<div class="container" id="main-content">
+			<?php echo $content; ?>
+		</div>
+	<?php endif; ?>
+	
 	<footer>
 		<div class="container footer">
 			<p class='copyText'>&copy; <?php echo date('Y') . $this->lang->line('dc_all_r_res'); ?></p>
