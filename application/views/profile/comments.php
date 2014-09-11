@@ -66,6 +66,6 @@
 	<div class="span1">
 	</div>
 	<div class="span3">
-	<?php $this->load->view('partials/profile_type_comments_menu.tpl.php');?>
+		<?php $this->load->view('partials/profile_type_comments_menu.tpl.php');?>
 	</div>		
 </div>

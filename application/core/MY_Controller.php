@@ -44,6 +44,8 @@ class MY_Controller extends CI_Controller
 		$this->data['header_bar'] = '';
 		$this->data['content'] = '';
         $this->data['css']     = '';
+		$this->data['controller_name'] = $this->controller_name;
+		$this->data['action_name'] = $this->action_name;
     }
 
 	protected function user_maturity()

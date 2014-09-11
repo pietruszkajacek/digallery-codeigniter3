@@ -77,9 +77,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['profile/(:num)(/(:num))?'] = "profile/index/$1$2";
 
-$route['profile/(:num)/(images|comments|galleries)(/(:any))?'] = "profile/$2/$1$3";
+$route['profile/(:num)/(images|galleries)'] = "profile/$2/$1";
 
-//$route['profile/(:num)(/(:any))?'] = "profile/index/$1$2";
+$route['profile/(:num)/comments/(image|gallery|profile)(/(\d+))?'] = "profile/comments/$1/$2$3";
+$route['profile/(:num)/comments(/(\d+))?'] = "profile/comments/$1/all$2";
 
 $route['posts/(:num)/in'] = 'posts/show_post_in/$1';
 

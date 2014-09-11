@@ -13,7 +13,7 @@
 	
 	<?php //echo '<script src="' . base_url() . 'assets/js/modernizr.custom.29278.js"></script>'; ?>
 </head>
-<body>
+<body data-controller="<?php echo $controller_name; ?>" data-action="<?php echo $action_name; ?>">
 	<noscript>
 		<div class="container no-script-info">
 			<div class="alert alert-error">
@@ -48,7 +48,7 @@
 		</div>
 	</footer>
 
-	<?php echo '<script src="http://code.jquery.com/jquery-1.9.0.js"></script>'; ?>
+	<?php echo '<script src="http://code.jquery.com/jquery-1.10.0.js"></script>'; ?>
 	<?php echo '<script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>'; ?>
 	<?php echo '<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>'; ?>
 	

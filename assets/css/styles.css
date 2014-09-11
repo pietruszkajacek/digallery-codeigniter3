@@ -276,6 +276,7 @@ img#picture-profile-edit {
 .last-added-images,
 .last-added-galleries {
   float: left;
+  width: 244px;
 }
 .last-added-galleries ul li {
   margin-bottom: 8px;

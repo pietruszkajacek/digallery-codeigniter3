@@ -1595,13 +1595,13 @@ class Profile extends MY_Controller
 		$this->render();		
 	}
 	
-	public function comments($user_id = 0)
-	{
+	public function comments($user_id = 0, $comments_type = 'all', $current_page = 1)
+	{	
 		$this->load->helper('browse');
 		$this->load->library('typography');
 		$this->load->helper('urllinker');
 		$this->load->model('comments_model');			
-		
+
 		$user = $this->browse_model->get_user(intval($user_id));
 		
 		if ($user === FALSE || !$user->active)
@@ -1609,26 +1609,19 @@ class Profile extends MY_Controller
 			show_error("Użytkownik nie istnieje...", 404, 'Błąd!');
 		}
 		
-		if (is_numeric($this->uri->rsegment(4)) || is_null($this->uri->rsegment(4)))
+		if ($comments_type == 'all') 
 		{
 			$page_segment = 4;
-			$comments_type = 'all';
 		}
 		else
 		{
 			$page_segment = 5;
-			$comments_type = $this->uri->rsegment(4);
-			
-			if ($comments_type !== 'image' && $comments_type !== 'gallery' && $comments_type !== 'profile')
-			{
-				show_404();
-			}
 		}
 		
-		if (($current_page = $this->current_page($page_segment)) === FALSE)
+		if ($current_page == 0) 
 		{
-			show_error("Strona nie występuje...", 404, 'Błąd!');
-		}		
+			$current_page = 1;
+		}
 		
 		$all_comments = $this->comments_model->counts_user_comments($user_id, $comments_type);
 
@@ -1649,7 +1642,7 @@ class Profile extends MY_Controller
 			}
 
 			$this->data['object_comments'] = $user_comments;
-			$this->data['pagination_links'] = $this->pagination_links("/profile/{$user_id}/comments/" . ($comments_type !== 'all' ? $comments_type : ''), 
+			$this->data['pagination_links'] = $this->pagination_links("/profile/{$user_id}/comments/" . ($comments_type !== 'all' ? $comments_type .'/' : ''), 
 					$this->profile_comments_config['page_size'], $all_comments, $page_segment);
 		}
 		else

@@ -155,7 +155,30 @@ class Testowy extends MY_Controller
 			echo 'FALSE';
 		}		
 	}
+	
+	public function ruter() {
+		
+		echo $this->uri->uri_string() . '<br />';
+		echo '0: ' . $this->uri->segment(0) . '<br />';
+		echo '1: ' . $this->uri->segment(1) . '<br />';
+		echo '2: ' . $this->uri->segment(2) . '<br /> ';
+		echo '3: ' . $this->uri->segment(3) . '<br /> ';
+		echo '4: ' . $this->uri->segment(4) . '<br /> ';
+		echo '5: ' . $this->uri->segment(5) . '<br /> ';
+		echo '6: ' . $this->uri->segment(6) . '<br /> ';
+		
+		echo $this->uri->ruri_string() . '<br />';
+		echo '0: ' . $this->uri->rsegment(0) . '<br />';
+		echo '1: ' . $this->uri->rsegment(1) . '<br />';
+		echo '2: ' . $this->uri->rsegment(2) . '<br /> ';
+		echo '3: ' . $this->uri->rsegment(3) . '<br /> ';
+		echo '4: ' . $this->uri->rsegment(4) . '<br /> ';
+		echo '5: ' . $this->uri->rsegment(5) . '<br /> ';
+		echo '6: ' . $this->uri->rsegment(6) . '<br /> ';
+
+	}
+	
 }
 
 /* End of file testowy.php */
-/* Location: ./application/controllers/testowy.php */
+/* Location: ./application/controllers/Testowy.php */
