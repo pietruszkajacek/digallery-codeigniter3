@@ -86,6 +86,7 @@ $route['posts/(:num)/in'] = 'posts/show_post_in/$1';
 
 $route['posts/(:num)/out'] = 'posts/show_post_out/$1';
 
+//$route['browse/index'] = "index/index";
 
 $route['default_controller'] = 'browse';
 $route['404_override'] = '';

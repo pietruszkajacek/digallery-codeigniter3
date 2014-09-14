@@ -97,67 +97,59 @@ class Browse extends MY_Controller
 
 	private function create_navigation_cats($cats_uri_rows, $base_url, $type)
 	{
-		if (count($this->uri->segment_array()) <= 2)
+		if (empty($cats_uri_rows))
+		// wszystkie kategorie, glowne bez rodzica
 		{
-			// URI .../browse/[images | galleries]/ - albo sama domena...
-
 			$sub_cats = $this->browse_model->get_sub_categories(NULL, $type);
-
-			$cats = create_hierarchical_sub_cats($base_url, $sub_cats); //base_url() . 'browse/images/'
+			$cats = create_hierarchical_sub_cats($base_url, $sub_cats);
 
 			return $this->generate_nav_list($cats, $base_url);
 		}
 		else
 		{
-			if (!empty($cats_uri_rows))
+			$last_row = end($cats_uri_rows);
+			$last_but_one_row = prev($cats_uri_rows);
+
+			// czy ostatni segment sciezki jest rodzicem dla innych kategorii
+			if ($this->browse_model->sub_cats_exist($last_row['id'], $type))
 			{
-				// URI OK!
+				//potomkowie ostatniego segmentu występują...
+				
+				//pobierz potomkow ostatniego segmentu sciezki 
+				$sub_cats = $this->browse_model->get_sub_categories($last_row['id'], $type);
 
-				$last_row = end($cats_uri_rows);
-				$last_but_one_row = prev($cats_uri_rows);
+				$path = create_hierarchical_path($base_url, $cats_uri_rows);
+				$cats = create_hierarchical_sub_cats($base_url, $sub_cats, NULL, $cats_uri_rows);
 
-				// czy ostatni segment URI jest rodzicem dla innych kategorii
-				if ($this->browse_model->sub_cats_exist($last_row['id'], $type))
-				{
-					//podkategorie występują...
-					//pobierz podkategorie
-					$sub_cats = $this->browse_model->get_sub_categories($last_row['id'], $type);
-
-					$path = create_hierarchical_path($base_url, $cats_uri_rows);
-					$cats = create_hierarchical_sub_cats($base_url, $sub_cats, NULL, $cats_uri_rows);
-
-					return $this->generate_nav_list($cats, $base_url, $path, true);
-				}
-				else
-				{
-					//podkategorie nie występują...
-
-					if (count($this->uri->segment_array()) == 3) // .../browse/podkategoria/
-					{
-						//pobierz główne kategorie id rodzica == NULL
-						$sub_cats = $this->browse_model->get_sub_categories(NULL, $type);
-
-						$cats = create_hierarchical_sub_cats($base_url, $sub_cats, $last_row['id']);
-
-						return $this->generate_nav_list($cats, $base_url, array(), true);
-					}
-					else
-					{
-						//pobierz podkategorie
-						$sub_cats = $this->browse_model->get_sub_categories($last_but_one_row['id'], $type);
-						array_pop($cats_uri_rows);
-
-						$path = create_hierarchical_path($base_url, $cats_uri_rows);
-						$cats = create_hierarchical_sub_cats($base_url, $sub_cats, $last_row['id'], $cats_uri_rows);
-
-						return $this->generate_nav_list($cats, $base_url, $path, true);
-					}
-				}
+				return $this->generate_nav_list($cats, $base_url, $path, true);
 			}
 			else
 			{
-				//...nieprawidlowa ścieżka kategorii w URI;
-				return array();
+				//potomkowie ostatniego segmentu nie występują...
+
+				if (count($cats_uri_rows) == 1)
+				// bez sciezki hierarchi, tylko kategorie najwyzszego poziomu bez rodzica
+				{
+					//pobierz główne kategorie id rodzica == NULL
+					$sub_cats = $this->browse_model->get_sub_categories(NULL, $type);
+
+					$cats = create_hierarchical_sub_cats($base_url, $sub_cats, $last_row['id']);
+
+					return $this->generate_nav_list($cats, $base_url, array(), true);
+				}
+				else
+				{
+					//pobierz potomkow przedostatniego segmentu sciezki kategorii
+					$sub_cats = $this->browse_model->get_sub_categories($last_but_one_row['id'], $type);
+					
+					// usun ostatni element w sciezce kategorii - wymagane by zbudowac prawidlowa sciezke
+					array_pop($cats_uri_rows);
+
+					$path = create_hierarchical_path($base_url, $cats_uri_rows);
+					$cats = create_hierarchical_sub_cats($base_url, $sub_cats, $last_row['id'], $cats_uri_rows);
+
+					return $this->generate_nav_list($cats, $base_url, $path, true);
+				}
 			}
 		}
 	}
@@ -166,10 +158,18 @@ class Browse extends MY_Controller
 	{		
 		$this->load->helper(array('browse', 'urlslug'));
 		$this->load->model('browse_model');
-
-		$this->data['adult_user'] = $this->adult_user;
 		
+		// Sprawdz poprawnosc sciezki kategorii przekazanej poprzez URI. Jesli sciezka prawidlowa to zwracana jest 
+		// pelna informacja o sciezce z bazy lub pusta tablica w przeciwnym wypadku.
+		// Pusta tablica zwracana jest takze w wypadku braku sciezki kategorii w URI tzn. URI zawiera tylko nazwe kontrolera i metody
+		// jak sie to dzieje w przypadku wyboru wszystkich kategorii do wyswietlenia.
 		$cats_uri_rows = $this->browse_model->get_cats_uri_rows(array_slice($this->uri->segment_array(), 2), 'images');
+		
+		// Nieprawidlowa sciezka kategorii w URI
+		if (count($this->uri->segment_array()) > 2 && empty($cats_uri_rows))
+		{
+			show_error('Nieprawidłowa sciezka kategorii');
+		}
 		
 		$search_tags = get_search_tags($this->input->get('search'));
 
@@ -177,33 +177,15 @@ class Browse extends MY_Controller
 		$sort = get_sort_param($this->input->get('sort'));
 		$search = implode("+", $search_tags);
 
-		$this->get_uri = create_get_params_uri($filter, $sort, $search);
-				
-		// menu nawigacyjne kategorii
-		$this->data['navi_cats'] = $this->create_navigation_cats($cats_uri_rows, base_url() . 'browse/images/', 'images');
-
-		if (empty($this->data['navi_cats']))
-		{
-			show_404();
-		}
-
-		if ($this->ion_auth->logged_in())
-		{
-			//gdy zalogowany
-			$this->data['logged_in_user'] = $this->ion_auth->user()->row();
-		}
-
-		$page_size = 18;
+		$page_size = 18; // TODO: powinno byc pobierane z configa
 		$current_page = is_null($this->input->get('page')) ? 1 : intval($this->input->get('page'));
 
 		if ($current_page < 1)
 		{
-			show_404();
+			show_error('Nieprawidłowa strona');
 		}
 
-		$count_uri_segs = count($this->uri->segment_array());
-
-		if ($count_uri_segs <= 2)
+		if (empty($cats_uri_rows))
 		{
 			$all_images = $this->browse_model->get_count_thumb_images(0, $filter, $sort, 0, $search_tags);
 		}
@@ -221,10 +203,11 @@ class Browse extends MY_Controller
 			{
 				show_404();
 			}
-
+			
 			$current_page + 1 > $max_pages ? $this->data['next'] = FALSE : $this->data['next'] = TRUE;
 			$current_page - 1 == 0 ? $this->data['preview'] = FALSE : $this->data['preview'] = TRUE;
-			$this->data['thumbs_small'] = $this->browse_model->get_thumb_images(($count_uri_segs <= 2 ? 0 : $last_row['id']), $filter, $sort, 0, $current_page, $page_size, $search_tags);
+			
+			$this->data['thumbs_small'] = $this->browse_model->get_thumb_images((empty($cats_uri_rows) ? 0 : $last_row['id']), $filter, $sort, 0, $current_page, $page_size, $search_tags);
 		}
 		else
 		{
@@ -239,13 +222,23 @@ class Browse extends MY_Controller
 			$this->data['thumbs_small'] = array();
 		}
 
+		if ($this->ion_auth->logged_in())
+		{
+			//gdy zalogowany
+			$this->data['logged_in_user'] = $this->ion_auth->user()->row();
+		}
+		
+		$this->data['adult_user'] = $this->adult_user;
+		
+		// menu nawigacyjne kategorii
+		$this->data['navi_cats'] = $this->create_navigation_cats($cats_uri_rows, base_url() . 'browse/images/', 'images');
+		
 		$this->data['current_page'] = $current_page;
 
-		$this->data['get_uri'] = $this->get_uri;
+		$this->data['get_uri'] = create_get_params_uri($filter, $sort, $search);
 		$this->data['get_uri_clear_search'] = create_get_params_uri($filter, $sort);
 
-		$browse_config = $this->config->item('browse', 'digallery');
-		
+		$browse_config = $this->config->item('browse', 'digallery');	
 		$this->data['nav_list_filter'] = $browse_config['filter'];
 		$this->data['nav_list_sort'] = $browse_config['sort'];
 

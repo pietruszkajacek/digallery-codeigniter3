@@ -196,7 +196,7 @@ if ( ! function_exists('get_filter_param'))
 {
 	function get_filter_param($filter)
 	{
-		if (!($filter === FALSE))
+		if (! is_null($filter))
 		{
 			$f = intval($filter);
 
@@ -220,7 +220,7 @@ if ( ! function_exists('get_sort_param'))
 {
 	function get_sort_param($sort)
 	{
-		if (!($sort === FALSE))
+		if (! is_null($sort))
 		{
 			$s = $sort;
 
@@ -244,7 +244,7 @@ if ( ! function_exists('get_search_tags'))
 {
 	function get_search_tags($search)
 	{
-		if ($search !== FALSE && !empty($search))
+		if ( (! is_null($search)) && (! empty($search)))
 		{
 			$result = split_tags($search);
 		}

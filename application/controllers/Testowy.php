@@ -178,6 +178,16 @@ class Testowy extends MY_Controller
 
 	}
 	
+	protected $zm = 'Testowy obiekt string';
+	
+	public function lay ()
+	{
+		$this->zm->content = 'DUPA';
+		
+		echo $this->zm;
+		
+		echo 'ley';
+	}
 }
 
 /* End of file testowy.php */

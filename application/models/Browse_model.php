@@ -284,58 +284,43 @@ class Browse_model extends CI_Model
 			return $result_rows->result_array();
 		}
 	}	
-	
-	public function get_cats_uri_rows($segs, $type)
+	// Sprawdza czy sciezka kategorii okreslona parametrem $segs wystepuje w bazie.
+	// Jesli sciezka kategorii wystepuje to jest zwracana. Kazdy element zwracanej
+	// tablicy zawiera pelny rekord kategorii z bazy danych.
+	public function get_cats_uri_rows($segs = array(), $type ='images')
 	{
 		$table_name = $this->categories_tables[$type];
 		$result = array();
 		
-		end($segs);
-		
-		$this->db->where('short_name_cat', current($segs));
-		$query = $this->db->get($table_name);
-
-		if ($query->num_rows() > 0)
+		if ( ! empty($segs))
 		{
-			foreach($query->result_array() as $node)
+			end($segs);
+
+			// znajdz wszystkie kategorie, których skrocona nazwa odpowiada ostatniemu segmentowi URI,
+			// w tym wypadku ostaniemu elementowi przekazanemu w tablicy $segs		
+			$this->db->where('short_name_cat', current($segs));
+			$query = $this->db->get($table_name);
+
+			// Sprawdz poprawnosc sciezki hierarchi URI z baza. Jesli taka sciezka zostanie znaleziona
+			// to jest zwracana jako tablica rekordow z tabeli kategorii
+			if ($query->num_rows() > 0)
 			{
-				$path = $this->build_path_cats($node['id'], $type);
-				
-				if ($path === $segs)
+				foreach ($query->result_array() as $node)
 				{
-					$result = $this->build_path_cats($node['id'], $type, TRUE);
-					break;
+					$path = $this->build_path_cats($node['id'], $type);
+					
+					// Jeśli sciezka URI jest identyczna jak ta zwrocona z bazy
+					// pobierz pelna informacje o sciezce kategorii
+					if ($path === $segs)
+					{
+						$result = $this->build_path_cats($node['id'], $type, TRUE);
+						break;
+					}
 				}
 			}
 		}
-
-		return $result;
 		
-		/*
-		$parent_id = NULL;
-		$result = array();
-
-		for ($i = 0; $i <= sizeof($segs) - 1; $i++)
-		{
-			$this->db->where('short_name_cat', $segs[$i]);
-			$this->db->where('parent_cat_id', $parent_id);
-			$query = $this->db->get($table_name);
-
-			if ($query->num_rows() > 0)
-			{
-				$row = $query->row_array();
-				$parent_id = $row['id'];
-				$result[] = $row;
-			}
-			else
-			{
-				$result = array();
-				break;
-			}
-		}
 		return $result;
-		 * 
-		 */
 	}
 
 	public function get_sub_categories($parent_id, $type)
@@ -365,6 +350,7 @@ class Browse_model extends CI_Model
 		}
 	}
 
+	// Zwraca pojedyncza sciezke do kategorii okreslonej parametrem $category_id
 	public function build_path_cats($category_id, $type, $full = FALSE)
 	{
 		$table_name = $this->categories_tables[$type];
