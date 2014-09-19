@@ -53,7 +53,6 @@
 	<?php echo '<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>'; ?>
 	
 	<?php echo '<script src="' . base_url() . 'assets/bootstrap/js/bootstrap.min.js"></script>'; ?>
-	<?php echo '<script src="' . base_url() . 'assets/js/common.js"></script>'; ?>
 
 	<?php
 		if (isset($js))

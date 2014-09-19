@@ -162,6 +162,13 @@ class MY_Controller extends CI_Controller
 			$this->data['content'] .= $this->load->view($view_path, $this->data, true);  //load the view
 		}
 		
+		if (file_exists(APPPATH . '../assets/js/' . $this->controller_name . '.js'))
+		{
+			$this->data['js'][] = $this->controller_name . '.js';
+		}
+		
+		$this->data['js'][] = 'digallery.js';
+		
 		$this->load->view("layouts/$template.tpl.php", $this->data);  //load the template
 	}
 

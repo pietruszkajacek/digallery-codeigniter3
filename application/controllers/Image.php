@@ -198,7 +198,7 @@ class Image extends MY_Controller
 		}
 		
 		$this->data['js'][] = 'comments.js';
-		$this->data['js'][] = 'preview.js';
+		//$this->data['js'][] = 'preview.js';
 
 		$this->data['name_of_ratings'] = $this->config->item('name_of_ratings', 'digallery');
 
