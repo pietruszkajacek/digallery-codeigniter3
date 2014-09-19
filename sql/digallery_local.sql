@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas generowania: 03 Wrz 2014, 11:04
+-- Czas generowania: 19 Wrz 2014, 19:07
 -- Wersja serwera: 5.6.20
 -- Wersja PHP: 5.5.15
 
@@ -29,16 +29,16 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `captcha` (
 `captcha_id` bigint(13) unsigned NOT NULL,
   `captcha_time` int(10) unsigned NOT NULL,
-  `ip_address` varchar(16) COLLATE utf8_polish_ci NOT NULL DEFAULT '0',
+  `ip_address` varchar(45) COLLATE utf8_polish_ci NOT NULL DEFAULT '0',
   `word` varchar(20) COLLATE utf8_polish_ci NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=366 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=383 ;
 
 --
 -- Zrzut danych tabeli `captcha`
 --
 
 INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
-(365, 1360447496, '192.168.0.100', '6v2n2bh7');
+(382, 1410085481, '127.0.0.1', 'JIV2LHXf');
 
 -- --------------------------------------------------------
 
@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `downloads` (
 `id` int(11) NOT NULL,
   `downloaded` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `image_id` int(10) unsigned NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=93 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=138 ;
 
 --
 -- Zrzut danych tabeli `downloads`
@@ -301,7 +301,52 @@ INSERT INTO `downloads` (`id`, `downloaded`, `image_id`) VALUES
 (89, '2014-09-01 18:56:33', 136),
 (90, '2014-09-02 05:12:32', 138),
 (91, '2014-09-02 10:33:35', 145),
-(92, '2014-09-03 09:03:42', 75);
+(92, '2014-09-03 09:03:42', 75),
+(93, '2014-09-03 12:19:47', 132),
+(94, '2014-09-03 14:52:01', 136),
+(95, '2014-09-03 15:39:13', 145),
+(96, '2014-09-03 19:44:40', 136),
+(97, '2014-09-03 19:45:56', 86),
+(98, '2014-09-03 19:47:50', 83),
+(99, '2014-09-05 14:01:50', 86),
+(100, '2014-09-05 15:48:51', 138),
+(101, '2014-09-05 15:53:29', 136),
+(102, '2014-09-06 07:31:23', 87),
+(103, '2014-09-06 07:31:41', 137),
+(104, '2014-09-06 07:33:16', 134),
+(105, '2014-09-06 07:34:39', 144),
+(106, '2014-09-06 07:35:19', 133),
+(107, '2014-09-06 07:35:41', 84),
+(108, '2014-09-06 11:03:43', 141),
+(109, '2014-09-07 09:15:11', 146),
+(110, '2014-09-07 10:24:11', 144),
+(111, '2014-09-07 13:03:13', 144),
+(112, '2014-09-08 10:41:00', 151),
+(113, '2014-09-08 11:49:34', 139),
+(114, '2014-09-08 15:49:14', 151),
+(115, '2014-09-08 15:57:40', 145),
+(116, '2014-09-08 16:31:41', 136),
+(117, '2014-09-09 07:21:48', 130),
+(118, '2014-09-09 07:25:35', 145),
+(119, '2014-09-09 07:29:51', 145),
+(120, '2014-09-09 07:43:04', 145),
+(121, '2014-09-09 07:48:43', 134),
+(122, '2014-09-10 08:25:02', 134),
+(123, '2014-09-10 08:26:04', 135),
+(124, '2014-09-10 08:26:27', 134),
+(125, '2014-09-10 08:36:26', 136),
+(126, '2014-09-10 14:03:37', 141),
+(127, '2014-09-11 14:57:26', 144),
+(128, '2014-09-11 19:05:56', 138),
+(129, '2014-09-14 09:07:07', 138),
+(130, '2014-09-15 17:55:50', 145),
+(131, '2014-09-19 12:09:48', 106),
+(132, '2014-09-19 12:11:26', 135),
+(133, '2014-09-19 12:14:23', 139),
+(134, '2014-09-19 12:14:35', 134),
+(135, '2014-09-19 12:19:37', 133),
+(136, '2014-09-19 12:33:59', 133),
+(137, '2014-09-19 12:41:01', 133);
 
 -- --------------------------------------------------------
 
@@ -314,7 +359,7 @@ CREATE TABLE IF NOT EXISTS `favorites` (
   `add_to_favorites` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `image_id` int(10) unsigned NOT NULL,
   `user_id` mediumint(8) unsigned NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=329 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=335 ;
 
 --
 -- Zrzut danych tabeli `favorites`
@@ -351,10 +396,12 @@ INSERT INTO `favorites` (`id`, `add_to_favorites`, `image_id`, `user_id`) VALUES
 (310, '2013-03-20 19:52:51', 133, 10),
 (321, '2013-03-20 19:54:19', 135, 10),
 (323, '2013-03-21 22:12:51', 108, 11),
-(324, '2013-03-22 13:36:07', 142, 11),
-(325, '2013-03-22 14:46:36', 106, 11),
 (326, '2013-03-28 17:27:27', 136, 17),
-(327, '2014-08-30 13:15:13', 96, 10);
+(327, '2014-08-30 13:15:13', 96, 10),
+(330, '2014-09-03 16:00:25', 137, 1),
+(331, '2014-09-03 16:08:16', 141, 1),
+(332, '2014-09-19 11:52:18', 142, 11),
+(334, '2014-09-19 12:01:36', 106, 11);
 
 -- --------------------------------------------------------
 
@@ -372,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `galleries` (
   `can_comment` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `can_evaluate` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `hidden` tinyint(1) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=47 ;
 
 --
 -- Zrzut danych tabeli `galleries`
@@ -390,7 +437,21 @@ INSERT INTO `galleries` (`id`, `created`, `user_id`, `name`, `description`, `cat
 (29, '2013-01-13 21:12:50', 11, 'Najnowsza galeria ;-)', 'Jakaś testowa galeria po raz enty...', 2, 1, 1, 0),
 (30, '2013-01-14 11:51:03', 10, 'Pejzaże', 'Pięć pejzaży...', 2, 1, 1, 0),
 (31, '2013-04-17 20:50:03', 11, 'Zwierzaki', 'Zwierzaki', 2, 1, 1, 0),
-(32, '2013-04-17 21:30:53', 11, 'Zwierzaki2', 'test zwierzaków zielonych stworków małych', 2, 1, 1, 0);
+(32, '2013-04-17 21:30:53', 11, 'Zwierzaki2', 'test zwierzaków zielonych stworków małych', 2, 1, 1, 0),
+(33, '2014-09-05 18:34:25', 11, 'test po roku', '', 2, 1, 1, 0),
+(34, '2014-09-07 11:01:30', 11, 'fdgdg', '', 2, 1, 1, 1),
+(35, '2014-09-09 16:45:27', 11, 'gh', '', 2, 1, 1, 1),
+(36, '2014-09-10 16:53:24', 11, 'sdfs', '', 2, 1, 1, 0),
+(37, '2014-09-10 16:53:38', 11, 'sdfsdf', '', 2, 1, 1, 0),
+(38, '2014-09-10 16:53:50', 11, 'wewrw', '', 2, 1, 1, 0),
+(39, '2014-09-10 16:54:05', 11, 'ssffs', '', 2, 1, 1, 0),
+(40, '2014-09-10 16:55:38', 11, 'ssf', '', 2, 1, 1, 0),
+(41, '2014-09-10 16:55:53', 11, 'sds', '', 2, 1, 1, 0),
+(42, '2014-09-10 16:56:09', 11, 'sdf', '', 2, 1, 1, 0),
+(43, '2014-09-10 16:56:18', 11, 'sdf', '', 2, 1, 1, 0),
+(44, '2014-09-10 16:57:17', 11, 'dscx', '', 2, 1, 1, 0),
+(45, '2014-09-10 16:57:33', 11, 'sffsfs', '', 2, 1, 1, 0),
+(46, '2014-09-10 16:57:44', 11, 'sdfsdfsdf', '', 2, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -448,7 +509,7 @@ CREATE TABLE IF NOT EXISTS `galleries_images` (
   `gallery_id` int(10) unsigned NOT NULL,
   `image_id` int(10) unsigned NOT NULL,
   `order` smallint(5) unsigned NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=810 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=860 ;
 
 --
 -- Zrzut danych tabeli `galleries_images`
@@ -588,7 +649,56 @@ INSERT INTO `galleries_images` (`id`, `gallery_id`, `image_id`, `order`) VALUES
 (803, 31, 74, 2),
 (807, 32, 145, 0),
 (808, 32, 144, 1),
-(809, 32, 74, 2);
+(809, 32, 74, 2),
+(810, 33, 133, 0),
+(811, 33, 90, 1),
+(812, 33, 76, 2),
+(814, 34, 58, 0),
+(815, 34, 86, 1),
+(816, 35, 138, 0),
+(817, 35, 136, 1),
+(818, 35, 137, 2),
+(819, 35, 145, 3),
+(820, 35, 144, 4),
+(821, 36, 148, 0),
+(822, 36, 149, 1),
+(823, 37, 150, 0),
+(824, 37, 151, 1),
+(825, 38, 151, 0),
+(826, 38, 148, 1),
+(827, 38, 149, 2),
+(828, 38, 150, 3),
+(829, 39, 148, 0),
+(830, 39, 149, 1),
+(831, 39, 150, 2),
+(832, 39, 151, 3),
+(833, 39, 138, 4),
+(834, 40, 145, 0),
+(835, 40, 137, 1),
+(836, 40, 138, 2),
+(837, 41, 134, 0),
+(838, 41, 84, 1),
+(839, 41, 88, 2),
+(840, 42, 138, 0),
+(841, 42, 139, 1),
+(842, 42, 134, 2),
+(843, 42, 110, 3),
+(844, 42, 132, 4),
+(845, 42, 133, 5),
+(846, 42, 148, 6),
+(847, 42, 151, 7),
+(848, 42, 149, 8),
+(849, 42, 150, 9),
+(850, 43, 145, 0),
+(851, 43, 138, 1),
+(852, 44, 132, 0),
+(853, 44, 110, 1),
+(854, 44, 115, 2),
+(855, 45, 145, 0),
+(856, 45, 137, 1),
+(857, 45, 139, 2),
+(858, 45, 138, 3),
+(859, 46, 115, 0);
 
 -- --------------------------------------------------------
 
@@ -601,7 +711,7 @@ CREATE TABLE IF NOT EXISTS `galleries_tags` (
   `gallery_id` int(10) unsigned NOT NULL,
   `tag_id` int(10) unsigned NOT NULL,
   `user_tag` tinyint(1) unsigned NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=51 ;
 
 --
 -- Zrzut danych tabeli `galleries_tags`
@@ -637,7 +747,23 @@ INSERT INTO `galleries_tags` (`id`, `gallery_id`, `tag_id`, `user_tag`) VALUES
 (31, 32, 259, 0),
 (32, 32, 260, 0),
 (33, 32, 254, 1),
-(34, 32, 265, 1);
+(34, 32, 265, 1),
+(35, 33, 59, 0),
+(36, 33, 269, 0),
+(37, 33, 20, 0),
+(38, 34, 270, 0),
+(39, 35, 273, 0),
+(40, 36, 274, 0),
+(41, 37, 275, 0),
+(42, 38, 276, 0),
+(43, 39, 277, 0),
+(44, 40, 278, 0),
+(45, 41, 279, 0),
+(46, 42, 280, 0),
+(47, 43, 280, 0),
+(48, 44, 281, 0),
+(49, 45, 282, 0),
+(50, 46, 283, 0);
 
 -- --------------------------------------------------------
 
@@ -688,7 +814,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `image_height` smallint(5) unsigned NOT NULL,
   `image_type` varchar(10) COLLATE utf8_polish_ci NOT NULL,
   `hidden` tinyint(1) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=147 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=152 ;
 
 --
 -- Zrzut danych tabeli `images`
@@ -697,7 +823,7 @@ CREATE TABLE IF NOT EXISTS `images` (
 INSERT INTO `images` (`id`, `submitted`, `user_id`, `title`, `category_id`, `description`, `can_comment`, `can_evaluated`, `plus_18`, `statement`, `file_name`, `file_type`, `raw_name`, `orig_name`, `client_name`, `file_ext`, `file_size`, `is_image`, `image_width`, `image_height`, `image_type`, `hidden`) VALUES
 (58, '2012-09-12 16:21:33', 11, 'POLISH', 12, 'Jakieś kwiatki', 1, NULL, 1, 1, '58.jpg', 'image/jpeg', '', '58.jpg', 'Tulips.jpg', '.jpg', '606.34', 1, 1024, 768, 'jpeg', 0),
 (74, '2012-09-19 13:55:42', 11, 'Koala1', 32, '', 1, NULL, 1, 1, '74.jpg', 'image/jpeg', '', '74.jpg', 'Koala.jpg', '.jpg', '762.53', 1, 1024, 768, 'jpeg', 0),
-(75, '2012-09-22 08:51:35', 1, 'Cartridge', 4, 'Black-Box Commodore C64', 1, NULL, 1, 1, '75.jpg', 'image/jpeg', '', '75.jpg', '519px-Blackbox3.jpg', '.jpg', '73.62', 1, 519, 600, 'jpeg', 0),
+(75, '2012-09-22 08:51:35', 1, 'Cartridge', 4, 'Black-Box Commodore C64', 1, 1, 1, 1, '75.jpg', 'image/jpeg', '', '75.jpg', '519px-Blackbox3.jpg', '.jpg', '73.62', 1, 519, 600, 'jpeg', 0),
 (76, '2012-09-22 08:54:17', 11, 'Wercia', 29, 'Weronika około 2 latek', 0, NULL, 0, 1, '76.JPG', 'image/jpeg', '', '76.JPG', 'DSC03317.JPG', '.JPG', '58.42', 1, 343, 512, 'jpeg', 0),
 (77, '2012-09-22 08:58:43', 11, 'Quasar', 14, 'Weronika około 2 latek', 0, NULL, 0, 1, '77.jpg', 'image/jpeg', '', '77.jpg', 'quasar1.jpg', '.jpg', '4.75', 1, 210, 207, 'jpeg', 0),
 (78, '2012-09-22 09:51:43', 11, 'Moto', 8, 'Motorek', 0, NULL, 0, 1, '78.jpg', 'image/jpeg', '', '78.jpg', 'Vinales-foto-Honda-150x150.jpg', '.jpg', '8.69', 1, 150, 150, 'jpeg', 0),
@@ -743,7 +869,11 @@ INSERT INTO `images` (`id`, `submitted`, `user_id`, `title`, `category_id`, `des
 (143, '2013-03-13 01:24:03', 11, 'sdfsf', 6, '', 1, NULL, 0, 1, '143.jpg', 'image/jpeg', '', '143.jpg', 'Panoramic_by_Deviant_Click.jpg', '.jpg', '612.06', 1, 2000, 338, 'jpeg', 0),
 (144, '2013-04-17 20:49:04', 11, 'papuga', 32, '', 0, 0, 0, 1, '144.jpg', 'image/jpeg', '', '144.jpg', 'HM183nQwcIFtc1PrTIOCRe4rIUK8wBaWKcgqD-g2Ma8.jpg', '.jpg', '118.42', 1, 1024, 768, 'jpeg', 0),
 (145, '2013-04-17 20:49:36', 11, 'Żaba@@', 32, '', 0, 0, 0, 1, '145.jpg', 'image/jpeg', '', '145.jpg', 'kubgE06V6VVeGjJLOc2ONa9RRX-PUvEEv-4Jw9tWW2o.jpg', '.jpg', '82.4', 1, 1024, 768, 'jpeg', 0),
-(146, '2014-08-29 16:14:23', 10, '-jhh!jakis_test---#duzo...Żaba', 32, '', 0, 0, 0, 1, '146.jpg', 'image/jpeg', '', '146.jpg', 'Chrysanthemum.jpg', '.jpg', '858.78', 1, 1024, 768, 'jpeg', 0);
+(146, '2014-08-29 16:14:23', 10, '-jhh!jakis_test---#duzo...Żaba', 32, '', 0, 0, 0, 1, '146.jpg', 'image/jpeg', '', '146.jpg', 'Chrysanthemum.jpg', '.jpg', '858.78', 1, 1024, 768, 'jpeg', 0),
+(148, '2014-09-07 11:09:57', 11, '1', 11, '', 0, 0, 0, 1, '148.png', 'image/png', '', '148.png', 'rules_1.png', '.png', '2.99', 1, 17, 47, 'png', 0),
+(149, '2014-09-07 11:10:13', 11, '2', 11, '', 0, 0, 0, 1, '149.png', 'image/png', '', '149.png', 'rules_2.png', '.png', '3.55', 1, 31, 47, 'png', 0),
+(150, '2014-09-07 11:10:26', 11, '3', 2, '', 0, 0, 0, 1, '150.png', 'image/png', '', '150.png', 'rules_3.png', '.png', '3.7', 1, 35, 47, 'png', 0),
+(151, '2014-09-07 11:10:37', 11, '4', 2, '', 0, 0, 0, 1, '151.png', 'image/png', '', '151.png', 'rules_4.png', '.png', '3.39', 1, 33, 47, 'png', 0);
 
 -- --------------------------------------------------------
 
@@ -758,7 +888,7 @@ CREATE TABLE IF NOT EXISTS `images_categories` (
   `parent_cat_id` mediumint(8) unsigned DEFAULT NULL,
   `lft` int(8) unsigned NOT NULL DEFAULT '0',
   `rgt` int(8) unsigned NOT NULL DEFAULT '0'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=40 ;
 
 --
 -- Zrzut danych tabeli `images_categories`
@@ -801,7 +931,8 @@ INSERT INTO `images_categories` (`id`, `name_cat`, `short_name_cat`, `parent_cat
 (35, 'Flora', 'flora', 12, 6, 7),
 (36, 'Fauna', 'fauna', 12, 8, 9),
 (37, 'Abstrakcja, surrealizm', 'abstrakcja_surr', 1, 45, 46),
-(38, 'Pejzaż', 'pejzaz', 1, 47, 48);
+(38, 'Pejzaż', 'pejzaz', 1, 47, 48),
+(39, 'Wszystkie', 'wszystkie', NULL, 1, 76);
 
 -- --------------------------------------------------------
 
@@ -811,18 +942,18 @@ INSERT INTO `images_categories` (`id`, `name_cat`, `short_name_cat`, `parent_cat
 
 CREATE TABLE IF NOT EXISTS `images_categories_temp` (
 `id` mediumint(8) unsigned NOT NULL,
-  `name_cat` varchar(25) COLLATE utf8_polish_ci NOT NULL,
+  `name` varchar(25) COLLATE utf8_polish_ci NOT NULL,
   `short_name_cat` varchar(15) COLLATE utf8_polish_ci NOT NULL,
   `parent_cat_id` mediumint(8) unsigned DEFAULT NULL,
-  `left` int(8) unsigned NOT NULL DEFAULT '0',
-  `right` int(8) unsigned NOT NULL DEFAULT '0'
+  `lft` int(8) unsigned NOT NULL DEFAULT '0',
+  `rgt` int(8) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=21 ;
 
 --
 -- Zrzut danych tabeli `images_categories_temp`
 --
 
-INSERT INTO `images_categories_temp` (`id`, `name_cat`, `short_name_cat`, `parent_cat_id`, `left`, `right`) VALUES
+INSERT INTO `images_categories_temp` (`id`, `name`, `short_name_cat`, `parent_cat_id`, `lft`, `rgt`) VALUES
 (1, 'Malarstwo', 'malarstwo', NULL, 2, 3),
 (2, 'Obraz', 'obraz', NULL, 4, 5),
 (3, 'Historia', 'historia', NULL, 6, 15),
@@ -887,7 +1018,7 @@ CREATE TABLE IF NOT EXISTS `images_tags` (
   `image_id` int(10) unsigned NOT NULL,
   `tag_id` int(10) unsigned NOT NULL,
   `user_tag` tinyint(1) unsigned NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=275 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=280 ;
 
 --
 -- Zrzut danych tabeli `images_tags`
@@ -1053,7 +1184,11 @@ INSERT INTO `images_tags` (`id`, `image_id`, `tag_id`, `user_tag`) VALUES
 (271, 146, 266, 0),
 (272, 146, 20, 0),
 (273, 146, 254, 0),
-(274, 146, 268, 0);
+(274, 146, 268, 0),
+(276, 149, 74, 0),
+(277, 150, 81, 0),
+(278, 151, 272, 0),
+(279, 148, 219, 0);
 
 -- --------------------------------------------------------
 
@@ -1133,13 +1268,18 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('7555a3d161bef3d137835c6d9530328d', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36', 1409479148, 'a:6:{s:9:"user_data";s:0:"";s:6:"stop18";i:0;s:34:"flash:old:previous_controller_name";s:6:"browse";s:30:"flash:old:previous_action_name";s:9:"galleries";s:34:"flash:new:previous_controller_name";s:4:"user";s:30:"flash:new:previous_action_name";s:5:"login";}'),
-('84bb0d42c9fdaddc504e3ad75c0fbcb6', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36', 1409492991, 'a:8:{s:9:"user_data";s:0:"";s:6:"stop18";i:0;s:17:"flash:old:csrfkey";s:8:"thvBMr2U";s:19:"flash:old:csrfvalue";s:20:"BFecvXsuSobSiZz4JqJs";s:34:"flash:old:previous_controller_name";s:6:"browse";s:30:"flash:old:previous_action_name";s:5:"index";s:34:"flash:new:previous_controller_name";s:6:"browse";s:30:"flash:new:previous_action_name";s:9:"galleries";}'),
-('9cd34fb92bc2f4865da82c6fc4b874f1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36', 1409656073, 'a:6:{s:34:"flash:old:previous_controller_name";s:4:"user";s:30:"flash:old:previous_action_name";s:5:"login";s:17:"flash:new:csrfkey";s:8:"id15DtSA";s:19:"flash:new:csrfvalue";s:20:"Ui38PjqM4nYTAwpeGcfW";s:34:"flash:new:previous_controller_name";s:6:"browse";s:30:"flash:new:previous_action_name";s:5:"index";}'),
-('b07e438eab55179e78d5566ad60d8e86', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36', 1409599045, ''),
-('c8bd4a9cf127e9bc24afe79ce607f4d9', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36', 1409685123, 'a:6:{s:14:"flash:old:type";s:4:"info";s:13:"flash:old:msg";s:48:"Użytkownik został pomyślnie wylogowany.<br />";s:17:"flash:new:csrfkey";s:8:"mJlOMjWs";s:19:"flash:new:csrfvalue";s:20:"ZJYQeGFmqvAE8UPDk9ob";s:34:"flash:new:previous_controller_name";s:6:"browse";s:30:"flash:new:previous_action_name";s:5:"index";}'),
-('dfa3e20037e4ed098a8e5aae8d5aa98d', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36', 1409735033, 'a:6:{s:14:"flash:old:type";s:4:"info";s:13:"flash:old:msg";s:48:"Użytkownik został pomyślnie wylogowany.<br />";s:17:"flash:new:csrfkey";s:8:"aDuq26gI";s:19:"flash:new:csrfvalue";s:20:"O5bSUMjT41uZ8L0xCoaz";s:34:"flash:new:previous_controller_name";s:6:"browse";s:30:"flash:new:previous_action_name";s:5:"index";}'),
-('f90c336a878b9584654ed0fa80acc6d3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36', 1409583605, 'a:2:{s:34:"flash:new:previous_controller_name";s:6:"browse";s:30:"flash:new:previous_action_name";s:6:"images";}');
+('194986da5035eda0f4432c941d8e462e', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36', 1411062154, 'a:4:{s:17:"flash:old:csrfkey";s:8:"EBimxtwn";s:19:"flash:old:csrfvalue";s:20:"moN3KVj8grI2U7p0B4DE";s:34:"flash:old:previous_controller_name";s:6:"browse";s:30:"flash:old:previous_action_name";s:5:"index";}'),
+('4a84115c070f3c6d6398fff754f09828', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36', 1411030593, 'a:8:{s:17:"flash:old:csrfkey";s:8:"4TelyV3D";s:19:"flash:old:csrfvalue";s:20:"ylRVEL1htiGIHQ9JdAFW";s:34:"flash:old:previous_controller_name";s:6:"browse";s:30:"flash:old:previous_action_name";s:5:"index";s:17:"flash:new:csrfkey";s:8:"rPg3spEb";s:19:"flash:new:csrfvalue";s:20:"45OPIyMQio6LW1m7j8HV";s:34:"flash:new:previous_controller_name";s:6:"browse";s:30:"flash:new:previous_action_name";s:5:"index";}'),
+('75a1e40b34da5b17c9c411ad7c303349', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36', 1411128640, 'a:6:{s:6:"stop18";i:1;s:34:"flash:old:previous_controller_name";s:5:"image";s:30:"flash:old:previous_action_name";s:7:"preview";s:27:"flash:old:previous_image_id";s:3:"134";s:34:"flash:new:previous_controller_name";s:5:"image";s:30:"flash:new:previous_action_name";s:4:"zoom";}'),
+('9104b0eeb75c78939d338bf40f618d79', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36', 1410805420, ''),
+('a027cc0db3ac7035d817bceb3769945a', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36', 1410982259, 'a:4:{s:17:"flash:new:csrfkey";s:8:"pJOjLrsn";s:19:"flash:new:csrfvalue";s:20:"JmaR0NjUI6YBE9HlZ3ov";s:34:"flash:new:previous_controller_name";s:6:"browse";s:30:"flash:new:previous_action_name";s:5:"index";}'),
+('a995b482aa052056955d87329c4e55ce', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36', 1411105890, ''),
+('b955a1ba0f5e8dc2a21eb0dbe2d112ee', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36', 1411046778, 'a:6:{s:34:"flash:old:previous_controller_name";s:5:"image";s:30:"flash:old:previous_action_name";s:7:"preview";s:27:"flash:old:previous_image_id";s:3:"139";s:34:"flash:new:previous_controller_name";s:5:"image";s:30:"flash:new:previous_action_name";s:7:"preview";s:27:"flash:new:previous_image_id";s:3:"139";}'),
+('bcb18991cd2abaae93fb7ac3431bab50', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36', 1410949945, 'a:8:{s:17:"flash:old:csrfkey";s:8:"5B8oQhRU";s:19:"flash:old:csrfvalue";s:20:"NWBM6SqVl02Xi5HUOf9b";s:34:"flash:old:previous_controller_name";s:6:"browse";s:30:"flash:old:previous_action_name";s:5:"index";s:17:"flash:new:csrfkey";s:8:"oUIdKHPV";s:19:"flash:new:csrfvalue";s:20:"iNbKD4oHcMzhSCqaFAmu";s:34:"flash:new:previous_controller_name";s:6:"browse";s:30:"flash:new:previous_action_name";s:5:"index";}'),
+('c50c58c486aab2218c27fc93413aab2b', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36', 1410688152, 'a:6:{s:34:"flash:old:previous_controller_name";s:6:"browse";s:30:"flash:old:previous_action_name";s:6:"images";s:17:"flash:new:csrfkey";s:8:"IXcVWrtk";s:19:"flash:new:csrfvalue";s:20:"CiOLeB8nE1AhmzkNFJrV";s:34:"flash:new:previous_controller_name";s:6:"browse";s:30:"flash:new:previous_action_name";s:5:"index";}'),
+('dd7760191649847b2d81580d36bc19ec', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36', 1411130332, 'a:6:{s:6:"stop18";i:1;s:34:"flash:old:previous_controller_name";s:5:"image";s:30:"flash:old:previous_action_name";s:7:"preview";s:27:"flash:old:previous_image_id";s:3:"133";s:34:"flash:new:previous_controller_name";s:5:"image";s:30:"flash:new:previous_action_name";s:4:"zoom";}'),
+('f0b03026eb08d1e6f51c052b171ec902', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36', 1410625212, 'a:4:{s:34:"flash:old:previous_controller_name";s:6:"browse";s:30:"flash:old:previous_action_name";s:6:"images";s:34:"flash:new:previous_controller_name";s:6:"browse";s:30:"flash:new:previous_action_name";s:6:"images";}'),
+('f45c066cc9234613f8e3b13739e13284', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36', 1410982259, 'a:4:{s:17:"flash:new:csrfkey";s:8:"xzVpRYeW";s:19:"flash:new:csrfvalue";s:20:"EDl7yJ8C64qVUp1ZBQPM";s:34:"flash:new:previous_controller_name";s:6:"browse";s:30:"flash:new:previous_action_name";s:5:"index";}');
 
 -- --------------------------------------------------------
 
@@ -1150,7 +1290,7 @@ INSERT INTO `sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity
 CREATE TABLE IF NOT EXISTS `tags` (
 `id` int(10) unsigned NOT NULL,
   `tag` varchar(25) COLLATE utf8_polish_ci NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=269 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=284 ;
 
 --
 -- Zrzut danych tabeli `tags`
@@ -1164,6 +1304,7 @@ INSERT INTO `tags` (`id`, `tag`) VALUES
 (89, '213'),
 (81, '3'),
 (85, '345'),
+(272, '4'),
 (84, '4554546'),
 (117, '456456'),
 (92, '5'),
@@ -1190,6 +1331,7 @@ INSERT INTO `tags` (`id`, `tag`) VALUES
 (174, 'dfgdgd'),
 (76, 'dgdg'),
 (101, 'drugi'),
+(281, 'dscx'),
 (48, 'dsg'),
 (267, 'duzo'),
 (146, 'dwóch'),
@@ -1200,6 +1342,7 @@ INSERT INTO `tags` (`id`, `tag`) VALUES
 (53, 'ewfwerwer'),
 (80, 'exif'),
 (79, 'exify'),
+(270, 'fdgdg'),
 (233, 'fest'),
 (173, 'fields'),
 (116, 'film'),
@@ -1208,6 +1351,7 @@ INSERT INTO `tags` (`id`, `tag`) VALUES
 (252, 'galeria'),
 (242, 'galerii'),
 (66, 'generalna'),
+(273, 'gh'),
 (120, 'grosz'),
 (125, 'grosza'),
 (171, 'Hortensje'),
@@ -1299,13 +1443,20 @@ INSERT INTO `tags` (`id`, `tag`) VALUES
 (175, 'Quasar'),
 (16, 'r'),
 (198, 'revolution'),
+(269, 'roku'),
 (163, 'rozmnażająca'),
 (24, 'rrrr'),
 (247, 'rzęsy'),
 (54, 's'),
 (50, 'sd'),
+(280, 'sdf'),
+(274, 'sdfs'),
+(275, 'sdfsdf'),
+(283, 'sdfsdfsdf'),
 (248, 'sdfsf'),
+(279, 'sds'),
 (49, 'sf'),
+(282, 'sffsfs'),
 (88, 'sfs'),
 (164, 'się'),
 (56, 'sl1'),
@@ -1313,6 +1464,8 @@ INSERT INTO `tags` (`id`, `tag`) VALUES
 (58, 'sl3'),
 (131, 'SMUTNY'),
 (179, 'Sonda'),
+(278, 'ssf'),
+(277, 'ssffs'),
 (257, 'stworek'),
 (262, 'stworków'),
 (62, 'submit'),
@@ -1341,9 +1494,11 @@ INSERT INTO `tags` (`id`, `tag`) VALUES
 (72, 'w'),
 (202, 'Wercia'),
 (176, 'Weronika'),
+(276, 'wewrw'),
 (135, 'Willa'),
 (106, 'wykonane'),
 (167, 'występuje'),
+(271, 'xvxcv'),
 (145, 'z'),
 (90, 'zapałki'),
 (162, 'zasadniczo'),
@@ -1394,20 +1549,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `signature` varchar(250) COLLATE utf8_polish_ci DEFAULT NULL,
   `signature_profile` varchar(500) COLLATE utf8_polish_ci DEFAULT NULL,
   `profile_can_comment` tinyint(1) unsigned NOT NULL DEFAULT '1'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=19 ;
 
 --
 -- Zrzut danych tabeli `users`
 --
 
 INSERT INTO `users` (`id`, `register_date`, `activate_date`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `city`, `sex`, `avatar`, `picture`, `signature`, `signature_profile`, `profile_can_comment`) VALUES
-(1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '\0\0', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '1c75832887', 'admin@admin.com', '', '50d65d2f7e9af9406e63dd6dd66a9910bbb6f2ee', 1342191416, NULL, 1268889823, 1409734994, 1, 'Admin', 'istrator', 'ADMIN', 'm', '4e98ccba228d9df7b4d48071ccda7f6c.png', NULL, 'Jakaś sygnaturka', '', 0),
+(1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '\0\0', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '1c75832887', 'admin@admin.com', '', '50d65d2f7e9af9406e63dd6dd66a9910bbb6f2ee', 1342191416, NULL, 1268889823, 1409769101, 1, 'Admin', 'istrator', 'ADMIN', 'm', '4e98ccba228d9df7b4d48071ccda7f6c.png', NULL, 'Jakaś sygnaturka', '', 0),
 (10, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'S', 'jpsiemce@gmail.com', '27c620fb0758ef77d540294f53a2451e7c2d4f27', '1c75832887', 'jpsiemce@gmail.com', NULL, NULL, NULL, NULL, 1342424058, 1409652155, 1, 'Marcin', 'Adamiecki', '', 'm', '456727050f23d39fe01dea0924317120.gif', '5c807cac632730ae16e8cc686a237d5e.jpg', 'Podpis pod komentarzami m.in.', '95% ludzi, widzac 4 linie o tej samej dlugosci polaczeone ze soba pod katem prostym powie ze to kwadrat. ', 0),
-(11, '2012-09-25 06:29:25', '0000-00-00 00:00:00', 'Y', 'qsr@o2.pl', '07a310316792992c89a497ce427c0b80c5ab8dc7', 'ab9030f9fc', 'qsr@o2.pl', NULL, NULL, NULL, '8ec04a236430ec008f2434958f081c984bb59a7d', 1348554565, 1372497123, 1, '-k jjj dfgdfg', '', '', 'm', NULL, NULL, 'TEST! Klikamy Lubie to \nhttp://www.facebook.com/pages/Micha%C5%82-Lenny-painting-design-art/142354392490652\n\nKomentuje ciebie, odwdzięcz się tym samym   ', 'Oto mój profil fotograficzny... TEST!!!!', 1),
-(17, '2013-01-18 14:37:43', '0000-00-00 00:00:00', 'Y', 'qsr@o2.pl', '48e6018ee68246cb441c700f151e00476905711d', 'a035fe75ab', 'jj_pietruszka@mmj.pl', NULL, NULL, NULL, NULL, 1358519864, 1364571905, 1, 'Jacek', 'Pietruszka', 'Siemianowice Śląskie', 'm', '28e573154dd46c9983355d35a6c505b4.gif', NULL, '', '', 1),
-(18, '2013-03-18 14:44:30', '0000-00-00 00:00:00', '', 'j_pietruszka@mmj.pl', 'a8a486c7969be604c60995c1561d296a5282d857', '549b4dbcfb', 'j_pietruszka@mmj.pl', '259ab60646e303d84a5dabde3d4141e8bf2a1110', NULL, NULL, NULL, 1363617870, 1363617870, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(19, '2014-09-02 10:25:22', '0000-00-00 00:00:00', '127.0.0.1', 'pietruszka.jacek@outlook.com', '$2y$08$ZySjjJBbgC.FebSuV7awcuKf8pO5/QKG2nsuhqLy15YqDmcN6S4Eq', NULL, 'pietruszka.jacek@outlook.comm', '8de12fd8a62a5994da8adda2007a704589f18a4c', NULL, NULL, NULL, 1409653522, 1409653679, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(20, '2014-09-02 18:36:14', '0000-00-00 00:00:00', '127.0.0.1', 'pietruszka.jacek@outlook.com1', '$2y$08$wXg.uLnRj.V6kcoByBGUXuaRlll.lYVsBCr8RHjBY5qhYf4hqpwJ6', NULL, 'pietruszka.jacek@outlook.com', '7c4560e61d37d595a19992aa2557ddce9e6e1d36', NULL, NULL, NULL, 1409682974, 1409682974, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
+(11, '2012-09-25 06:29:25', '0000-00-00 00:00:00', 'Y', 'qsr@o2.pl', '$2y$08$19K6Zh1nc4mo61IkY2e9vuEuDw2QZUaEMIy.zjxb3vJ1gP/qOLNru', 'ab9030f9fc', 'qsr@o2.pl', NULL, NULL, NULL, NULL, 1348554565, 1411127490, 1, '-k jjj dfgdfg', '', '', 'm', NULL, NULL, 'TEST! Klikamy Lubie to \nhttp://www.facebook.com/pages/Micha%C5%82-Lenny-painting-design-art/142354392490652\n\nKomentuje ciebie, odwdzięcz się tym samym   ', 'Oto mój profil fotograficzny... TEST!!!!', 1),
+(17, '2013-01-18 14:37:43', '0000-00-00 00:00:00', 'Y', 'qsr@o2.plt', '48e6018ee68246cb441c700f151e00476905711d', 'a035fe75ab', 'jj_pietruszka@mmj.pl', NULL, NULL, NULL, NULL, 1358519864, 1364571905, 1, 'Jacek', 'Pietruszka', 'Siemianowice Śląskie', 'm', '28e573154dd46c9983355d35a6c505b4.gif', NULL, '', '', 1),
+(18, '2013-03-18 14:44:30', '0000-00-00 00:00:00', '', 'j_pietruszka@mmj.pl', 'a8a486c7969be604c60995c1561d296a5282d857', '549b4dbcfb', 'j_pietruszka@mmj.pl', '259ab60646e303d84a5dabde3d4141e8bf2a1110', NULL, NULL, NULL, 1363617870, 1363617870, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1419,7 +1572,7 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
 `id` mediumint(8) unsigned NOT NULL,
   `user_id` mediumint(8) unsigned NOT NULL,
   `group_id` mediumint(8) unsigned NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=20 ;
 
 --
 -- Zrzut danych tabeli `users_groups`
@@ -1431,9 +1584,7 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (11, 10, 2),
 (12, 11, 2),
 (18, 17, 2),
-(19, 18, 2),
-(20, 19, 2),
-(21, 20, 2);
+(19, 18, 2);
 
 -- --------------------------------------------------------
 
@@ -1445,7 +1596,7 @@ CREATE TABLE IF NOT EXISTS `views` (
 `id` int(11) NOT NULL,
   `viewed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `image_id` int(11) unsigned NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=3692 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=3918 ;
 
 --
 -- Zrzut danych tabeli `views`
@@ -5072,7 +5223,233 @@ INSERT INTO `views` (`id`, `viewed`, `image_id`) VALUES
 (3688, '2014-09-03 07:41:40', 137),
 (3689, '2014-09-03 08:18:23', 146),
 (3690, '2014-09-03 08:18:53', 136),
-(3691, '2014-09-03 09:03:31', 75);
+(3691, '2014-09-03 09:03:31', 75),
+(3692, '2014-09-03 09:17:19', 76),
+(3693, '2014-09-03 12:19:10', 132),
+(3694, '2014-09-03 14:29:52', 144),
+(3695, '2014-09-03 14:51:18', 142),
+(3696, '2014-09-03 14:51:26', 136),
+(3697, '2014-09-03 14:51:43', 136),
+(3698, '2014-09-03 14:51:59', 136),
+(3699, '2014-09-03 15:38:24', 145),
+(3700, '2014-09-03 15:38:55', 145),
+(3701, '2014-09-03 15:56:46', 137),
+(3702, '2014-09-03 16:07:54', 141),
+(3703, '2014-09-03 16:08:04', 141),
+(3704, '2014-09-03 19:44:13', 145),
+(3705, '2014-09-03 19:44:31', 138),
+(3706, '2014-09-03 19:44:35', 137),
+(3707, '2014-09-03 19:44:37', 136),
+(3708, '2014-09-03 19:45:50', 86),
+(3709, '2014-09-03 19:47:47', 83),
+(3710, '2014-09-05 14:01:17', 145),
+(3711, '2014-09-05 14:01:49', 86),
+(3712, '2014-09-05 15:48:48', 138),
+(3713, '2014-09-05 15:49:10', 110),
+(3714, '2014-09-05 15:49:14', 110),
+(3715, '2014-09-05 15:50:50', 139),
+(3716, '2014-09-05 15:53:28', 136),
+(3717, '2014-09-05 16:34:36', 84),
+(3718, '2014-09-05 16:34:54', 75),
+(3719, '2014-09-05 18:32:12', 145),
+(3720, '2014-09-05 18:32:54', 132),
+(3721, '2014-09-06 07:28:35', 135),
+(3722, '2014-09-06 07:28:44', 136),
+(3723, '2014-09-06 07:29:02', 137),
+(3724, '2014-09-06 07:29:09', 135),
+(3725, '2014-09-06 07:29:10', 139),
+(3726, '2014-09-06 07:29:13', 143),
+(3727, '2014-09-06 07:31:21', 87),
+(3728, '2014-09-06 07:31:39', 137),
+(3729, '2014-09-06 07:31:51', 133),
+(3730, '2014-09-06 07:33:14', 134),
+(3731, '2014-09-06 07:34:09', 144),
+(3732, '2014-09-06 07:35:17', 133),
+(3733, '2014-09-06 07:35:39', 84),
+(3734, '2014-09-06 09:35:08', 146),
+(3735, '2014-09-06 10:59:38', 144),
+(3736, '2014-09-06 11:03:13', 146),
+(3737, '2014-09-06 11:03:41', 141),
+(3738, '2014-09-06 11:04:45', 133),
+(3739, '2014-09-07 07:08:05', 146),
+(3740, '2014-09-07 07:11:12', 146),
+(3741, '2014-09-07 08:03:10', 146),
+(3742, '2014-09-07 08:03:42', 146),
+(3743, '2014-09-07 08:41:21', 146),
+(3744, '2014-09-07 09:15:11', 146),
+(3745, '2014-09-07 10:03:56', 143),
+(3746, '2014-09-07 10:23:57', 138),
+(3747, '2014-09-07 10:24:08', 144),
+(3748, '2014-09-07 10:40:43', 146),
+(3749, '2014-09-07 12:50:01', 142),
+(3750, '2014-09-07 12:50:54', 135),
+(3751, '2014-09-07 12:50:58', 151),
+(3752, '2014-09-07 12:50:59', 150),
+(3753, '2014-09-07 12:51:01', 149),
+(3754, '2014-09-07 12:51:04', 151),
+(3755, '2014-09-07 12:51:05', 145),
+(3756, '2014-09-07 13:03:02', 150),
+(3757, '2014-09-07 13:03:04', 144),
+(3758, '2014-09-07 13:03:20', 84),
+(3759, '2014-09-07 13:08:07', 145),
+(3760, '2014-09-07 13:08:15', 145),
+(3761, '2014-09-07 13:09:20', 148),
+(3762, '2014-09-07 13:10:00', 133),
+(3763, '2014-09-07 14:54:51', 138),
+(3764, '2014-09-07 15:01:23', 146),
+(3765, '2014-09-07 16:55:28', 133),
+(3766, '2014-09-07 17:27:30', 146),
+(3767, '2014-09-08 08:16:02', 150),
+(3768, '2014-09-08 08:47:13', 142),
+(3769, '2014-09-08 10:18:18', 150),
+(3770, '2014-09-08 10:34:56', 151),
+(3771, '2014-09-08 10:42:47', 151),
+(3772, '2014-09-08 11:09:02', 149),
+(3773, '2014-09-08 11:46:16', 151),
+(3774, '2014-09-08 11:48:00', 139),
+(3775, '2014-09-08 11:51:00', 149),
+(3776, '2014-09-08 11:53:51', 151),
+(3777, '2014-09-08 15:42:39', 151),
+(3778, '2014-09-08 15:47:05', 151),
+(3779, '2014-09-08 15:57:37', 145),
+(3780, '2014-09-08 16:31:29', 136),
+(3781, '2014-09-08 17:25:50', 151),
+(3782, '2014-09-09 03:54:53', 149),
+(3783, '2014-09-09 07:10:11', 136),
+(3784, '2014-09-09 07:19:11', 130),
+(3785, '2014-09-09 07:24:10', 130),
+(3786, '2014-09-09 07:25:33', 145),
+(3787, '2014-09-09 07:26:57', 130),
+(3788, '2014-09-09 07:42:36', 130),
+(3789, '2014-09-09 07:46:38', 130),
+(3790, '2014-09-09 07:48:21', 131),
+(3791, '2014-09-09 07:48:26', 144),
+(3792, '2014-09-09 07:48:33', 132),
+(3793, '2014-09-09 07:48:40', 134),
+(3794, '2014-09-09 07:49:21', 142),
+(3795, '2014-09-09 07:59:57', 141),
+(3796, '2014-09-09 08:00:02', 138),
+(3797, '2014-09-09 09:52:39', 139),
+(3798, '2014-09-09 09:53:03', 96),
+(3799, '2014-09-09 09:59:51', 96),
+(3800, '2014-09-09 10:16:28', 135),
+(3801, '2014-09-09 10:42:15', 146),
+(3802, '2014-09-09 15:02:41', 146),
+(3803, '2014-09-09 15:03:00', 101),
+(3804, '2014-09-09 16:48:07', 141),
+(3805, '2014-09-09 16:48:45', 148),
+(3806, '2014-09-09 16:49:27', 145),
+(3807, '2014-09-09 16:49:32', 139),
+(3808, '2014-09-09 16:50:08', 94),
+(3809, '2014-09-09 16:50:12', 92),
+(3810, '2014-09-09 16:50:19', 83),
+(3811, '2014-09-09 16:50:23', 78),
+(3812, '2014-09-09 16:50:27', 89),
+(3813, '2014-09-09 16:50:30', 58),
+(3814, '2014-09-09 16:50:35', 74),
+(3815, '2014-09-09 16:50:37', 75),
+(3816, '2014-09-09 16:53:46', 75),
+(3817, '2014-09-09 16:55:07', 75),
+(3818, '2014-09-09 16:55:21', 75),
+(3819, '2014-09-09 16:57:57', 75),
+(3820, '2014-09-09 17:01:37', 75),
+(3821, '2014-09-09 17:09:39', 75),
+(3822, '2014-09-09 17:11:44', 75),
+(3823, '2014-09-09 17:14:19', 75),
+(3824, '2014-09-09 17:14:47', 75),
+(3825, '2014-09-09 19:57:46', 90),
+(3826, '2014-09-09 20:41:13', 145),
+(3827, '2014-09-09 21:27:29', 134),
+(3828, '2014-09-09 21:33:24', 96),
+(3829, '2014-09-10 08:22:16', 90),
+(3830, '2014-09-10 08:24:57', 134),
+(3831, '2014-09-10 08:25:59', 135),
+(3832, '2014-09-10 08:26:21', 134),
+(3833, '2014-09-10 08:36:22', 136),
+(3834, '2014-09-10 14:03:30', 141),
+(3835, '2014-09-10 14:04:56', 87),
+(3836, '2014-09-10 17:01:23', 133),
+(3837, '2014-09-10 17:01:55', 139),
+(3838, '2014-09-10 17:02:11', 96),
+(3839, '2014-09-10 17:02:21', 77),
+(3840, '2014-09-10 17:02:26', 76),
+(3841, '2014-09-10 17:02:35', 138),
+(3842, '2014-09-10 17:02:46', 96),
+(3843, '2014-09-11 06:19:17', 145),
+(3844, '2014-09-11 06:19:36', 141),
+(3845, '2014-09-11 06:19:41', 142),
+(3846, '2014-09-11 06:19:56', 141),
+(3847, '2014-09-11 06:19:58', 106),
+(3848, '2014-09-11 06:20:01', 105),
+(3849, '2014-09-11 06:20:04', 104),
+(3850, '2014-09-11 06:20:06', 102),
+(3851, '2014-09-11 06:20:08', 101),
+(3852, '2014-09-11 06:20:10', 100),
+(3853, '2014-09-11 06:20:12', 99),
+(3854, '2014-09-11 06:20:30', 100),
+(3855, '2014-09-11 06:20:32', 101),
+(3856, '2014-09-11 06:20:36', 102),
+(3857, '2014-09-11 06:20:38', 104),
+(3858, '2014-09-11 06:20:42', 105),
+(3859, '2014-09-11 06:20:45', 106),
+(3860, '2014-09-11 06:20:57', 125),
+(3861, '2014-09-11 06:21:03', 115),
+(3862, '2014-09-11 06:21:06', 110),
+(3863, '2014-09-11 06:21:08', 107),
+(3864, '2014-09-11 06:21:10', 97),
+(3865, '2014-09-11 06:21:12', 96),
+(3866, '2014-09-11 06:21:15', 94),
+(3867, '2014-09-11 06:21:18', 93),
+(3868, '2014-09-11 06:21:20', 92),
+(3869, '2014-09-11 06:21:22', 91),
+(3870, '2014-09-11 06:21:25', 90),
+(3871, '2014-09-11 06:21:27', 89),
+(3872, '2014-09-11 06:21:30', 88),
+(3873, '2014-09-11 06:21:32', 87),
+(3874, '2014-09-11 06:21:34', 86),
+(3875, '2014-09-11 06:21:36', 85),
+(3876, '2014-09-11 06:21:38', 84),
+(3877, '2014-09-11 06:21:40', 83),
+(3878, '2014-09-11 06:21:42', 82),
+(3879, '2014-09-11 06:21:44', 78),
+(3880, '2014-09-11 06:21:46', 77),
+(3881, '2014-09-11 06:21:48', 76),
+(3882, '2014-09-11 06:21:50', 74),
+(3883, '2014-09-11 06:21:52', 58),
+(3884, '2014-09-11 06:22:00', 58),
+(3885, '2014-09-11 10:44:49', 142),
+(3886, '2014-09-11 10:58:11', 146),
+(3887, '2014-09-11 14:19:24', 141),
+(3888, '2014-09-11 14:57:23', 144),
+(3889, '2014-09-11 19:05:54', 138),
+(3890, '2014-09-13 07:15:27', 82),
+(3891, '2014-09-13 12:26:23', 145),
+(3892, '2014-09-14 09:06:25', 96),
+(3893, '2014-09-14 09:07:05', 138),
+(3894, '2014-09-14 09:49:16', 146),
+(3895, '2014-09-15 17:55:45', 145),
+(3896, '2014-09-18 13:26:19', 151),
+(3897, '2014-09-18 13:26:29', 139),
+(3898, '2014-09-18 17:00:08', 142),
+(3899, '2014-09-19 08:59:42', 146),
+(3900, '2014-09-19 08:59:47', 141),
+(3901, '2014-09-19 08:59:55', 142),
+(3902, '2014-09-19 11:46:14', 142),
+(3903, '2014-09-19 11:51:30', 142),
+(3904, '2014-09-19 12:00:04', 142),
+(3905, '2014-09-19 12:00:42', 142),
+(3906, '2014-09-19 12:01:02', 106),
+(3907, '2014-09-19 12:01:20', 106),
+(3908, '2014-09-19 12:09:46', 106),
+(3909, '2014-09-19 12:10:52', 135),
+(3910, '2014-09-19 12:14:17', 135),
+(3911, '2014-09-19 12:14:21', 139),
+(3912, '2014-09-19 12:14:33', 134),
+(3913, '2014-09-19 12:19:17', 134),
+(3914, '2014-09-19 12:19:27', 133),
+(3915, '2014-09-19 12:33:46', 133),
+(3916, '2014-09-19 12:39:05', 133),
+(3917, '2014-09-19 12:40:42', 133);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -5218,7 +5595,7 @@ ALTER TABLE `views`
 -- AUTO_INCREMENT dla tabeli `captcha`
 --
 ALTER TABLE `captcha`
-MODIFY `captcha_id` bigint(13) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=366;
+MODIFY `captcha_id` bigint(13) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=383;
 --
 -- AUTO_INCREMENT dla tabeli `comments`
 --
@@ -5228,17 +5605,17 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=232;
 -- AUTO_INCREMENT dla tabeli `downloads`
 --
 ALTER TABLE `downloads`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=93;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=138;
 --
 -- AUTO_INCREMENT dla tabeli `favorites`
 --
 ALTER TABLE `favorites`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=329;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=335;
 --
 -- AUTO_INCREMENT dla tabeli `galleries`
 --
 ALTER TABLE `galleries`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT dla tabeli `galleries_categories`
 --
@@ -5253,12 +5630,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT dla tabeli `galleries_images`
 --
 ALTER TABLE `galleries_images`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=810;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=860;
 --
 -- AUTO_INCREMENT dla tabeli `galleries_tags`
 --
 ALTER TABLE `galleries_tags`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=51;
 --
 -- AUTO_INCREMENT dla tabeli `groups`
 --
@@ -5268,12 +5645,12 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT dla tabeli `images`
 --
 ALTER TABLE `images`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=147;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=152;
 --
 -- AUTO_INCREMENT dla tabeli `images_categories`
 --
 ALTER TABLE `images_categories`
-MODIFY `id` mediumint(9) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=39;
+MODIFY `id` mediumint(9) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT dla tabeli `images_categories_temp`
 --
@@ -5288,7 +5665,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
 -- AUTO_INCREMENT dla tabeli `images_tags`
 --
 ALTER TABLE `images_tags`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=275;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=280;
 --
 -- AUTO_INCREMENT dla tabeli `login_attempts`
 --
@@ -5303,22 +5680,22 @@ MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 -- AUTO_INCREMENT dla tabeli `tags`
 --
 ALTER TABLE `tags`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=269;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=284;
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT dla tabeli `users_groups`
 --
 ALTER TABLE `users_groups`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT dla tabeli `views`
 --
 ALTER TABLE `views`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3692;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3918;
 --
 -- Ograniczenia dla zrzutów tabel
 --
