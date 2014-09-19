@@ -1,3 +1,4 @@
+/* CSS crunched with Crunch - http://crunchapp.net/ */
 body {
   position: relative;
   padding-top: 41px;
@@ -120,13 +121,6 @@ body {
 .thumbnails .thumbnail-preview .container-thumb-preview {
   height: 550px;
 }
-.thumbnails .thumbnail-preview .container-thumb-preview .outer-block-thumb-preview img.stop18 {
-  display: block;
-  margin: 0px auto;
-}
-.thumbnails .thumbnail-preview .container-thumb-preview .outer-block-thumb-preview .alert-stop18 {
-  margin-bottom: 0px;
-}
 .thumbnails .container-thumb,
 .thumbnails > li.thumbnail-mini .container-thumb-mini,
 .thumbnails > li.thumbnail-small .thumbnail-browse .container-thumb-browse-image,
@@ -190,6 +184,13 @@ body {
   cursor: pointer;
   cursor: -moz-zoom-out;
   cursor: -webkit-zoom-out;
+}
+img.stop18 {
+  display: block;
+  margin: 0px auto;
+}
+.alert-stop18 {
+  margin-bottom: 0px;
 }
 .thumbs-mini-images-row,
 .thumbs-gallery-row {

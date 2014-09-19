@@ -9,7 +9,7 @@ DIGALLERY = $.extend( true, (typeof DIGALLERY === 'undefined') ? { } : DIGALLERY
 	common: {
 	
 		init: function () {
-			//alert( 'OK!' );
+			
 		},
 		
 		modal_center: function ( event ) {

@@ -75,7 +75,7 @@ class Image extends MY_Controller
 		
 		$this->increment_downloads($image_id);
 		
-		$this->data['js'][] = 'zoom.js';
+		//$this->data['js'][] = 'zoom.js';
 		
 		$this->data['no_container_class'] = TRUE;
 		$this->render();

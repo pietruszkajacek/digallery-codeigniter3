@@ -215,14 +215,14 @@ DIGALLERY = $.extend( true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY,
 		},
 		
 		comments_init: function ( commenting_function_name ) {
-			$( '#delete-comment-confirm-modal' ).on( 'show', modal_center );
-			$( '#edit-comment-modal' ).on( 'show', modal_center );
+			$( '#delete-comment-confirm-modal' ).on( 'show', DIGALLERY.common.modal_center );
+			$( '#edit-comment-modal' ).on( 'show', DIGALLERY.common.modal_center );
 
 			$( '#send-comment-btn' ).click( commenting_function_name );
-			$( '.btn-comment-trash' ).click( delete_comment );
-			$( '.btn-comment-edit' ).click( edit_comment );
+			$( '.btn-comment-trash' ).click( DIGALLERY.comments.delete_comment );
+			$( '.btn-comment-edit' ).click( DIGALLERY.comments.edit_comment );
 
-			$( '#login-comment-btn' ).click( open_signin_dropdown );
+			$( '#login-comment-btn' ).click( DIGALLERY.comments.open_signin_dropdown );
 		}
 	}
 } );
