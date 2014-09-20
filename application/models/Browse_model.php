@@ -12,8 +12,9 @@ class Browse_model extends CI_Model
 	public function __construct()
 	{
 		parent::__construct();
-		
-		$this->filter = $this->config->item('browse', 'digallery')['filter'];
+
+		$browse_filter = $this->config->item('browse', 'digallery');
+        $this->filter = $browse_filter['filter'];
 	}
 
 	public function get_images_categories()
