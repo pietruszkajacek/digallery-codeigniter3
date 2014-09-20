@@ -523,8 +523,8 @@ class Profile extends MY_Controller
 		
 		$this->data['profile_signature'] = $this->typography->auto_typography(htmlEscapeAndLinkUrls($user->signature_profile), TRUE);
 		
-		$this->data['js'][] = 'comments.js';
-		$this->data['js'][] = 'profile.js';
+		//$this->data['js'][] = 'comments.js';
+		//$this->data['js'][] = 'profile.js';
 		
 		$this->render();
 	}
@@ -971,7 +971,7 @@ class Profile extends MY_Controller
 				$this->data['allow_comments'] = array(
 					'name' => 'allow_comments',
 					'id' => 'allow_comments',
-					'class' => 'checkbox',
+					//'class' => 'checkbox',
 					'value' => '1',
 					'checked' => (bool) set_checkbox('allow_comments', '1', isset($image) ? (bool) $image->can_comment : ''),
 				);
@@ -987,7 +987,7 @@ class Profile extends MY_Controller
 				$this->data['allow_evaluated'] = array(
 					'name' => 'allow_evaluated',
 					'id' => 'allow_evaluated',
-					'class' => 'checkbox',
+					//'class' => 'checkbox',
 					'value' => '1',
 					'checked' => (bool) set_checkbox('allow_evaluated', '1', isset($image) ? (bool) $image->can_evaluated : ''),
 				);
@@ -1003,7 +1003,7 @@ class Profile extends MY_Controller
 				$this->data['mature'] = array(
 					'name' => 'mature',
 					'id' => 'mature',
-					'class' => 'checkbox',
+					//'class' => 'checkbox',
 					'value' => '1',
 					'checked' => (bool) set_checkbox('mature', '1', isset($image) ? (bool) $image->plus_18 : ''),
 				);
@@ -1019,7 +1019,7 @@ class Profile extends MY_Controller
 				$this->data['statement'] = array(
 					'name' => 'statement',
 					'id' => 'statement',
-					'class' => 'checkbox',
+					//'class' => 'checkbox',
 					'value' => '1',
 					'checked' => (bool) set_checkbox('statement', '1', isset($image) ? (bool) $image->statement : ''),
 				);
@@ -1047,7 +1047,7 @@ class Profile extends MY_Controller
 
 				// wybór kategorii i walidacja formularza
 				$this->data['js'][] = 'widget.js';
-				$this->data['js'][] = 'submit.js';
+				//$this->data['js'][] = 'submit.js';
 
 				$this->render();
 
