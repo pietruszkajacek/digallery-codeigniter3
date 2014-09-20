@@ -168,7 +168,7 @@ class Browse extends MY_Controller
 		// Nieprawidlowa sciezka kategorii w URI
 		if (count($this->uri->segment_array()) > 2 && empty($cats_uri_rows))
 		{
-			show_error('Nieprawidłowa sciezka kategorii');
+			show_error('Nieprawidłowa sciezka kategorii.');
 		}
 		
 		$search_tags = get_search_tags($this->input->get('search'));

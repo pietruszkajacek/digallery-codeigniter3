@@ -309,7 +309,7 @@ class Browse_model extends CI_Model
 				foreach ($query->result_array() as $node)
 				{
 					$path = $this->build_path_cats($node['id'], $type);
-					
+
 					// Jeśli sciezka URI jest identyczna jak ta zwrocona z bazy
 					// pobierz pelna informacje o sciezce kategorii
 					if ($path === $segs)
@@ -358,17 +358,18 @@ class Browse_model extends CI_Model
 				
 		$query  = "SELECT " . ($full ? '*' : 'parent.short_name_cat') . " FROM {$table_name} AS node, {$table_name} AS parent ";
 		$query .= "WHERE node.lft BETWEEN parent.lft AND parent.rgt ";
-		$query .= "AND node.id = {$category_id};";
+		$query .= "AND node.id = {$category_id} ORDER BY parent.lft;";
 		
-		$result = array();
+		$result_array = $this->db->query($query)->result_array();
+		array_shift($result_array);
 		
 		if ($full)
 		{
-			$result = $this->db->query($query)->result_array();
+			$result = $result_array;
 		}
 		else
 		{
-			foreach ($this->db->query($query)->result_array() as $node)
+			foreach ($result_array as $node)
 			{
 				$result[] = $node['short_name_cat'];
 			}
