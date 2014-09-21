@@ -376,30 +376,6 @@ class Browse_model extends CI_Model
 		}
 
 		return $result;
-		
-		/*
-		do
-		{
-			$this->db->where('id', $category_id);
-			$query = $this->db->get($table_name);
-
-			if ($query->num_rows() > 0)
-			{
-				$row = $query->row();
-				$result[] = $row->short_name_cat;
-				$category_id = $row->parent_cat_id;
-			}
-			else
-			{
-				$result = array();
-				break;
-			}
-		}
-		while ($category_id !== NULL);
-
-		return empty($result) ? $result : array_reverse($result);
-		 * 
-		 */
 	}
 
 	public function get_image($image_id)

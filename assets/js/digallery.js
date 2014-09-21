@@ -9,6 +9,19 @@ DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, 
 		init: function () {
 
 		},
+		
+		clean_alerts: function () {
+			$("div.alert").remove();
+		},
+		
+		// type: error, info, warning, success
+		alert: function (layer, head_text, msg, type) {
+			var X = '<a class="close" data-dismiss="alert" href="#">×</a>',
+				head = '<h4 class="alert-heading">' + head_text + '</h4>';
+		
+			$(layer).prepend('<div class="alert alert-' + type + '">'+ X + head + msg + '</div>');
+		},
+		
 		modal_center: function (event) {
 			var modal = $(this);
 
@@ -17,6 +30,7 @@ DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, 
 
 			return this;
 		},
+		
 		set_maturity_user: function (event) {
 			event.preventDefault();
 
@@ -45,6 +59,7 @@ DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, 
 				}
 			});
 		},
+		
 		init_ajax_signin_form_submit: function () {
 			$("#signin-form").submit(function (event) {
 

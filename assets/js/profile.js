@@ -97,13 +97,19 @@ DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, 
 					$("#ctrl-gr-statement").attr("class", "control-group");
 				}
 
-				$("div.alert").remove(); // usuń stare komunikaty
+				//$("div.alert").remove(); // usuń stare komunikaty
+				DIGALLERY.common.clean_alerts();
 
 				// wygeneruj komunikat o błędzie...
-				$("#content-submit").prepend('<div class="alert alert-error"></div>');
-				$("div.alert").append('<a class="close" data-dismiss="alert" href="#">×</a>')
-						.append('<h4 class="alert-heading">B\u0142\u0105d!</h4>')
-						.append(msg_error);
+//				$("#content-submit").prepend('<div class="alert alert-error"></div>');
+//				$("div.alert").append('<a class="close" data-dismiss="alert" href="#">×</a>')
+//						.append('<h4 class="alert-heading">B\u0142\u0105d!</h4>')
+//						.append(msg_error);
+				
+				//DIGALLERY.common.error_alert("#content-submit", msg_error);
+				
+				DIGALLERY.common.alert("#content-submit", 'Błąd walidacji danych', msg_error, 'warning');
+				
 				return false;
 			});
 

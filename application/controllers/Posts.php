@@ -479,7 +479,7 @@ class Posts extends MY_Controller
 				$this->data['current_page'] = '';
 			}
 
-			$this->data['js'] = 'posts.js';
+			$this->data['js'][] = 'posts.js';
 
 			$this->data['form_attr'] = array(
 				'id' => 'posts-box',

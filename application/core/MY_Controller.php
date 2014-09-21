@@ -43,7 +43,8 @@ class MY_Controller extends CI_Controller
         $this->data['top_bar'] = '';
 		$this->data['header_bar'] = '';
 		$this->data['content'] = '';
-        $this->data['css']     = '';
+        $this->data['css'] = '';
+		$this->data['js'] = array();
 		$this->data['controller_name'] = $this->controller_name;
 		$this->data['action_name'] = $this->action_name;
     }
