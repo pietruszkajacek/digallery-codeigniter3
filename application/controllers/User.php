@@ -12,11 +12,6 @@ class User extends MY_Controller
 		parent::__construct();
 	}
 
-	public function index()
-	{
-		
-	}
-
 	function _check_math_captcha($str)
 	{
 		if ($this->mathcaptcha->check_answer($str)) // sprawdzamy, czy podana przez nas odpowiedź jest prawidłowa

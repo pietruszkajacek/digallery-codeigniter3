@@ -1333,7 +1333,7 @@ class Profile extends MY_Controller
 				$this->data['delete_avatar'] = array(
 					'name' => 'delete_avatar',
 					'id' => 'delete_avatar',
-					'class' => 'checkbox',
+					//'class' => 'checkbox',
 					'value' => '1',
 				);
 
@@ -1365,7 +1365,7 @@ class Profile extends MY_Controller
 				$this->data['delete_picture'] = array(
 					'name' => 'delete_picture',
 					'id' => 'delete_picture',
-					'class' => 'checkbox',
+					//'class' => 'checkbox',
 					'value' => '1',
 				);
 
