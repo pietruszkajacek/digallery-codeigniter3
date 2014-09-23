@@ -141,61 +141,61 @@ DIGALLERY = $.extend( true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY,
 			var comment_id = $comment_div.attr( 'id' );
 			var $a_comment = $( '#comment_' + comment_id, $comment_div );
 
-			$.ajax( {
+			$.ajax({
 				cache: false,
 				url: '/comments/get_comment/' + comment_id,
-				success: function ( data )
+				success: function (data)
 				{
-					$( 'textarea', '#edit-comment-modal' ).val( data.comment );
+					$('textarea', '#edit-comment-modal').val(data.comment);
 
-					$( '#save-comment-btn' ).off().on( 'click', function ( event )
+					$('#save-comment-btn').off().on('click', function (event) 
 					{
-						if ( $( 'textarea', '#edit-comment-modal' ).val() != '' )
+						if ($('textarea', '#edit-comment-modal').val() != '')
 						{
-							if ( $( 'textarea', '#edit-comment-modal' ).val() === data.comment )
+							if ($('textarea', '#edit-comment-modal').val() === data.comment)
 							{
-								$( '#edit-comment-modal' ).modal( 'hide' );
+								$('#edit-comment-modal').modal('hide');
 							}
 							else
 							{
-								$.ajax( {
+								$.ajax({
 									cache: false,
 									url: '/comments/edit_comment/' + comment_id,
-									data: {comment: $( 'textarea', '#edit-comment-modal' ).val()},
+									data: {comment: $('textarea', '#edit-comment-modal').val()},
 									type: 'POST',
-									success: function ( data )
+									success: function (data)
 									{
-										if ( data.status == 1 )
+										if (data.status == 1)
 										{
-											$( '#edit-comment-modal' ).one( 'hidden', function ( evt )
+											$('#edit-comment-modal').one('hidden', function (evt)
 											{
-												$a_comment.html( data.comment );
-												$( 'em', $comment_div ).html( 'Ostatnia zmiana: ' + data.last_edit );
-											} );
+												$a_comment.html(data.comment);
+												$('em', $comment_div).html('Ostatnia zmiana: ' + data.last_edit);
+											});
 
-											$( '#edit-comment-modal' ).modal( 'hide' );
+											$('#edit-comment-modal').modal('hide');
 										}
-										else if ( data.status == 0 )
+										else if (data.status == 0)
 										{
-											alert( 'Nie udało się zaktualizować komentarza...' );
+											alert('Nie udało się zaktualizować komentarza...');
 										}
 									},
-									error: function ( data )
+									error: function (data)
 									{
-										alert( 'Błąd...' )
+										alert('Błąd...')
 									}
-								} );
+								});
 							}
 						}
 						else
 						{
-							alert( 'Komentarz musi zawierać treść!' );
+							alert('Komentarz musi zawierać treść!');
 						}
 
 						event.preventDefault();
-					} );
+					});
 
-					$( '#edit-comment-modal' ).modal( 'show' );
+					$('#edit-comment-modal').modal('show');
 				},
 				error: function ( data )
 				{

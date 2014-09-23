@@ -7,7 +7,7 @@
 	<meta name="description" content="Fotograficzny Portal Społecznościowy - digallery">
 	<meta name="keywords" content="fotografia cyfrowa, zdjęcia">
 	<title>Fotograficzny Portal Społecznościowy - digallery</title>
-	<link href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" rel="stylesheet">
+	<link href="https://code.jquery.com/ui/1.11.1/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
 	<link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.css" rel="stylesheet">
 	<link href="<?php echo base_url();?>assets/css/styles.css" rel="stylesheet">
 	
@@ -48,9 +48,9 @@
 		</div>
 	</footer>
 
-	<?php echo '<script src="http://code.jquery.com/jquery-1.10.0.js"></script>'; ?>
-	<?php echo '<script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>'; ?>
-	<?php echo '<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>'; ?>
+	<?php echo '<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>'; ?>
+	<?php echo '<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>'; ?>
+	<?php echo '<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>'; ?>
 	
 	<?php echo '<script src="' . base_url() . 'assets/bootstrap/js/bootstrap.min.js"></script>'; ?>
 

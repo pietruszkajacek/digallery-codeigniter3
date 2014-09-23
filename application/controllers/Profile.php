@@ -220,7 +220,7 @@ class Profile extends MY_Controller
 
 				$result = TRUE;
 
-				foreach ($gallery_images_in_gallery as $image_id) 
+				foreach ($gallery_images_in_gallery as $image_id)
 				{
 					if (!in_array(array('id' => $image_id), $images_ids)) 
 					{
@@ -275,15 +275,12 @@ class Profile extends MY_Controller
 				}
 			}
 			
-			
-			
 			$this->form_validation->set_rules('gallery_name', 'Nazwa galerii', 'required');
 			$this->form_validation->set_rules('gallery_images_in_gallery', 'Prace w galerii', 'callback__validate_images_in_gallery');
 			$this->form_validation->set_rules('gallery_description', 'Opis galerii', 'min_length[3]');
 					
 			if ($this->form_validation->run() == TRUE)
 			{
-				
 				$user_tags = split_tags(strtolower($this->input->post('tags')));
 				$title_desc_tags = split_tags(strtolower($this->input->post('gallery_name') . ' ' . $this->input->post('gallery_description')));
 				$tags = array_unique(array_merge($user_tags, $title_desc_tags));
@@ -388,7 +385,7 @@ class Profile extends MY_Controller
 				$this->data['allow_comments'] = array(
 					'name' => 'allow_comments',
 					'id' => 'allow_comments',
-					'class' => 'checkbox',
+					//'class' => 'checkbox',
 					'value' => '1',
 					'checked' => (bool) set_checkbox('allow_comments', '1', isset($gallery) ? (bool) $gallery->can_comment : ''),
 				);
@@ -429,7 +426,7 @@ class Profile extends MY_Controller
 				}
 				
 				$this->data['thumb_mini_config'] = $this->config->item('thumb_mini', 'digallery');
-				$this->data['js'] = 'add_edit_gallery.js';
+				//$this->data['js'] = 'add_edit_gallery.js';
 				
 				$this->render();
 			}

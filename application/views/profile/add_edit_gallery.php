@@ -52,14 +52,12 @@
 					<ul class="thumbnails thumbs-add-edit-gallery">
 						<?php if (isset($images_in_gallery)) : ?>
 							<?php foreach ($images_in_gallery as $image_in_gallery): ?>
-								<li data-image-id="<?php echo $image_in_gallery->id; ?>" class="span1 add-edit-gallery-thumb test">
-									<div class="thumbnail thumbnail-mini">
-										<div style="position: relative; font-size: 9px;"class="container-thumb-mini">
-											<!-- <span style="position: absolute; height: 56px; width: 45px;"><?php echo $image_in_gallery->order; ?></span> -->
+								<li data-image-id="<?php echo $image_in_gallery->id; ?>" class="span1 add-edit-gallery-thumb thumbnail-mini dragdrop">
+									<div class="thumbnail">
+										<div class="container-thumb-mini">
 											<div class="outer-block-thumb-mini">
 												<?php
-													echo img(array('src' => $thumb_mini_config['path'] .
-														$image_in_gallery->file_name, 'alt' => $image_in_gallery->title));
+													echo img(array('src' => $thumb_mini_config['path'] . $image_in_gallery->file_name, 'alt' => $image_in_gallery->title));
 												?>
 											</div>
 										</div>

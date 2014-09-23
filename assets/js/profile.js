@@ -1,9 +1,16 @@
 DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, {
+	
 	profile: {
+		start_drag: false,
+		sortable_receive:  false,
+		disable_thumb_allowed: false,
+		remove_thumb_allowed: false,
+		
 		index: function () {
 			DIGALLERY.common.init_ajax_signin_form_submit();
 			DIGALLERY.comments.comments_init( DIGALLERY.comments.add_profile_comment );
 		},
+		
 		submit: function () {
 			// Wyśrodkowanie okna dialogowego
 			$('#select-categories-modal').on('show', DIGALLERY.common.modal_center);
@@ -97,17 +104,9 @@ DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, 
 					$("#ctrl-gr-statement").attr("class", "control-group");
 				}
 
-				//$("div.alert").remove(); // usuń stare komunikaty
-				DIGALLERY.common.clean_alerts();
+				DIGALLERY.common.clean_alerts(); // usuń stare komunikaty
 
 				// wygeneruj komunikat o błędzie...
-//				$("#content-submit").prepend('<div class="alert alert-error"></div>');
-//				$("div.alert").append('<a class="close" data-dismiss="alert" href="#">×</a>')
-//						.append('<h4 class="alert-heading">B\u0142\u0105d!</h4>')
-//						.append(msg_error);
-				
-				//DIGALLERY.common.error_alert("#content-submit", msg_error);
-				
 				DIGALLERY.common.alert("#content-submit", 'Błąd!', msg_error, 'error');
 				
 				return false;
@@ -159,6 +158,194 @@ DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, 
 				DIGALLERY.common.alert("#content-submit", 'Błąd!', msg_error, 'error');
 				return false;
 			});
+		},
+
+		add_edit_gallery: function () {
+			// pobierz prace - pierwszą stronę
+			DIGALLERY.profile._load_thumbs(1);
+
+			// obsługa kliknięcia w przyciski paginacji
+			$(document).on("click", "#thumbs-images-pagination ul li", function (event) {
+				var href_target = $(event.target).attr('href');
+				var page = 1;
+
+				if (href_target !== '#')
+				{
+					page = href_target[2];
+				}
+
+				// pobiera prace z danej parametrem page strony
+				DIGALLERY.profile._load_thumbs(page);
+
+				return false;
+			});
+			
+			// init widget'a sortable - nasza tworzona galeria
+			$("#gallery ul.thumbnails").sortable({
+				receive: function (event, ui)
+				{
+					//console.log('receive');
+					if (DIGALLERY.profile.start_drag)
+					{
+						DIGALLERY.profile.sortable_receive = true;
+					}
+				},
+				beforeStop: function (event, ui)
+				{
+					//console.log('beforestop');
+					if (DIGALLERY.profile.remove_thumb_allowed)
+					{
+						DIGALLERY.profile.remove_thumb_allowed = false;
+						$("#gallery ul.thumbnails").sortable("enable");
+						$('li[data-image-id=' + $(ui.item).attr('data-image-id') + ']', $('#thumbs-images')).draggable('enable');
+					}
+				},
+				out: function (event, ui)
+				{
+					//console.log('out');
+					if (DIGALLERY.profile.start_drag)
+					{
+						if (DIGALLERY.profile.sortable_receive)
+						{
+							DIGALLERY.profile.disable_thumb_allowed = true;
+							DIGALLERY.profile.sortable_receive = false;
+						}
+						else
+						{
+							DIGALLERY.profile.disable_thumb_allowed = false;
+						}
+					}
+				},
+				over: function (event, ui)
+				{
+//					//console.log('over');
+//					if (DIGALLERY.profile.start_drag)
+//					{
+//						DIGALLERY.profile.disable_allowed = true;
+//					}
+				},
+				sort: function (event, ui)
+				{
+//					console.log('sort');
+//					if (DIGALLERY.profile.start_drag)
+//					{
+//						DIGALLERY.profile.disable_allowed = true;
+//					}
+				}
+			});
+
+			// przycisk wyślij tworzona galeria wysyłana jest na serwer
+			$('#profile-add-edit-gallery').submit(DIGALLERY.profile._submit_gallery);
+		},
+		
+		// wysyłanie galerii na serwer
+		_submit_gallery: function () {
+			var number_images_in_gallery = $("#gallery li").length;
+
+			if ($('input[name="gallery_name"]').val() != "" && number_images_in_gallery > 0)
+			{
+				var $hidden = $('input:hidden[name="gallery_images_in_gallery"]');
+
+				$hidden.val('');
+
+				// przypisz id prac w tworzonej galerii do ukrytego pola gallery_images_in_gallery
+				$("#gallery li").each(function (i, val) {
+					var $item = $(this);
+					var value_hidden = $hidden.val();
+
+					// przypisuje wszystkie id w ciagu do pola input gallery_images_in_gallery rozdzielone
+					// spacją (1 2 3 itd). Po ostatnim elemencie rozdzielająca spacja nie jest dodawana.
+					$hidden.val(value_hidden + $item.attr('data-image-id') + (i !== (number_images_in_gallery - 1) ? " " : ""));
+				});
+
+				return true;
+			}
+
+			// walidacja
+			var msg_error = '';
+
+			if ($('input[name="gallery_name"]').val() == "")
+			{
+				$("#ctrl-gr-gallery-name").attr("class", "control-group error");
+				msg_error = msg_error + 'Nie określiłeś nazwy galerii.' + '<br />';
+			}
+			else
+			{
+				$("#ctrl-gr-gallery-name").attr("class", "control-group");
+			}
+
+			if (!(number_images_in_gallery > 0))
+			{
+				msg_error = msg_error + 'Brak prac w galerii.' + '<br />';
+			}
+
+			DIGALLERY.common.clean_alerts(); // usuń stare komunikaty
+
+			// wygeneruj komunikat o błędzie...
+			DIGALLERY.common.alert("#content-add-edit-gallery", "Błąd!", msg_error, "error");
+
+			return false;
+		},
+		
+		_load_thumbs: function ( page ) {
+			$.ajax({
+				cache: false,
+				url: '/profile/get_thumbs_images/' + page,
+				type: 'POST',
+				success: function (data) {
+
+					$('#thumbs-images').html(data.images); // prace
+					$('#thumbs-images-pagination').html(data.pagination); //paginacja
+					
+					// inicjalizacja przeciągania prac (drag & drop)
+					$("#thumbs-images ul.thumbnails > li.dragdrop").draggable({
+						connectToSortable: "#gallery ul.thumbnails", // powiązanie z tworzoną galerią (element sortable)
+						helper: "clone",
+						//revert: "invalid",
+						start: function (event, ui)
+						{
+							//console.log('start_drag');
+							DIGALLERY.profile.start_drag = true;
+						},
+						stop: function (event, ui)
+						{
+							//console.log('stop_drag');
+							DIGALLERY.profile.start_drag = false;
+
+							if (DIGALLERY.profile.disable_thumb_allowed)
+							{
+								$(this).draggable("disable");
+								DIGALLERY.profile.disable_thumb_allowed = false;
+							}
+						}
+					});
+
+					// "wyłącz" przeciąganie prac, które zostały już przeniesione do nowo
+					// tworzonej galerii
+					$('#thumbs-images li.dragdrop').each(function () {
+						$item = $(this);
+
+						if ($('li[data-image-id=' + $item.attr('data-image-id') + ']', $('#gallery')).length === 1)
+						{
+							$item.draggable('disable');
+						}
+					});
+					
+					//
+					$("#thumbs-images").droppable({
+						accept: "#gallery li",
+						drop: function (event, ui) {
+							//console.log('drop');
+							$("#gallery ul.thumbnails").sortable("disable");
+							(ui.helper).remove(); 
+							DIGALLERY.profile.remove_thumb_allowed = true;
+						}
+					});
+
+					// wyłącz możliwość wyboru dla list i ich elementów
+					$("ul, li").disableSelection();
+				}
+			});
 		}
 	}
-} );
+});

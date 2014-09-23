@@ -14,7 +14,8 @@ class Testowy extends MY_Controller
 	{
 		//$this->data['no_container_class'] = TRUE;
 		//$this->data['js'][] = 'testdiv.js';
-		$this->render();		
+		//$this->render();		
+		echo 'sfs';
 	}
 	
 	public function divtest()

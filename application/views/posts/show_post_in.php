@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="span10">
+	<div id="compose-message" class="span10">
 		<h3>Poczta <small>skrzynka odbiorcza</small></h3>
 		<hr>
 		<ul class="nav nav-pills">

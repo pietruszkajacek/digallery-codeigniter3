@@ -195,8 +195,6 @@ class Posts extends MY_Controller
 				
 				$this->data['user_from'] = $user_to;
 
-				$this->data['js'] = 'show_post_in.js';
-
 				$this->render();
 			}
 		}
@@ -319,8 +317,6 @@ class Posts extends MY_Controller
 					'post_message' => form_error('post_message') ? ' error' : '',
 				);
 
-				$this->data['js'] = 'posts.js';
-
 				$this->render();
 			}
 		}
@@ -422,8 +418,6 @@ class Posts extends MY_Controller
 				$this->data['current_page'] = '';
 			}
 
-			$this->data['js'] = 'posts.js';
-
 			$this->data['form_attr'] = array(
 				'id' => 'posts-box',
 			);
@@ -478,8 +472,6 @@ class Posts extends MY_Controller
 				$this->data['posts'] = array();
 				$this->data['current_page'] = '';
 			}
-
-			$this->data['js'][] = 'posts.js';
 
 			$this->data['form_attr'] = array(
 				'id' => 'posts-box',

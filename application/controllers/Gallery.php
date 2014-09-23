@@ -116,7 +116,7 @@ class Gallery extends MY_Controller
 		$this->data['js'][] = 'comments.js';
 		$this->data['js'][] = 'jquery.jcarousel.min.0.2.8.js';
 		//$this->data['js'][] = 'jquery.jcarousel.min.0.3.0.js';
-		$this->data['js'][] = 'gallery_view.js';
+		//$this->data['js'][] = 'gallery_view.js';
 
 		$this->render();
 	}

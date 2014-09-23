@@ -10,8 +10,8 @@ DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, 
 
 		},
 		
-		clean_alerts: function () {
-			$("div.alert").remove();
+		clean_alerts: function ( ) {
+			$( "div.alert.app-alert" ).remove( );
 		},
 		
 		// type: error, info, warning, success
@@ -19,7 +19,7 @@ DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, 
 			var X = '<a class="close" data-dismiss="alert" href="#">×</a>',
 				head = '<h4 class="alert-heading">' + head_text + '</h4>';
 		
-			$(layer).prepend('<div class="alert alert-' + type + '">'+ X + head + msg + '</div>');
+			$(layer).prepend('<div class="alert alert-' + type + ' app-alert">'+ X + head + msg + '</div>');
 		},
 		
 		modal_center: function (event) {
@@ -100,9 +100,17 @@ UTIL = {
 		var ns = DIGALLERY,
 				action = (action === undefined) ? "init" : action;
 
+//		if ( controller !== "" && ns[controller] ) {
+//			if ( typeof ns[controller][action] === "function" ) {
+//				ns[controller][action]();
+//			} else if ( typeof ns[controller][action] === "object" ) {
+//				ns[controller][action]["init"]();
+//			}
+//		}
+
 		if (controller !== "" && ns[controller] && typeof ns[controller][action] == "function") {
 			ns[controller][action]();
-		}
+		} 
 	},
 	init: function () {
 		var body = document.body,

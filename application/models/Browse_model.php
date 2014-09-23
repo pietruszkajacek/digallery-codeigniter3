@@ -574,12 +574,26 @@ class Browse_model extends CI_Model
 	
 	public function soft_delete_image($image_id)
 	{
-		$this->db->where('id', $image_id);
-		$this->db->update('images', array('hidden' => 1));
+		
+		$this->db->where('image_id', $image_id);
+		$this->db->from('galleries_images');
+		
+		// Sprawdź czy praca została włączona do galerii
+		// jeśli tak to nie pozwól na jej ukrycie (soft delete)
+		if ($this->db->count_all_results() > 0)
+		{
+			return FALSE;
+		}
+		// ...praca nie występuje w galerii, można ją ukryć.
+		else
+		{
+			$this->db->where('id', $image_id);
+			$this->db->update('images', array('hidden' => 1));
 
-		return $this->db->affected_rows() == 1;
-	}	
-	
+			return $this->db->affected_rows() == 1;
+		}
+	}
+
 	public function soft_delete_gallery($gallery_id)
 	{
 		$this->db->where('id', $gallery_id);
@@ -820,11 +834,7 @@ class Browse_model extends CI_Model
 			return TRUE;
 		}
 	}	
-	
-	
-	
-	
-	
+
 	public function add_tags(array $tags)
 	{
 		$result = TRUE;

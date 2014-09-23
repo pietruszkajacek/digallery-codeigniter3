@@ -47,7 +47,8 @@ DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, 
 
 				event.preventDefault();
 			});
-
+			
+			// Usuwanie pracy...
 			$('#delete-image-btn').click(function (event) {
 				var image_id = ((new String(document.location)).split('/'))[5];
 
@@ -58,6 +59,12 @@ DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, 
 							window.location = "/";
 						});
 
+						$('#delete-image-confirm-modal').modal('hide');
+					}
+					else
+					{
+						//DIGALLERY.common.clean_alerts();
+						//DIGALLERY.common.alert(".span11", 'Błąd!', 'Niestety nie można usunąć pracy.', 'error');
 						$('#delete-image-confirm-modal').modal('hide');
 					}
 				}, "json");

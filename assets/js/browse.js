@@ -1,9 +1,12 @@
 DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, {
+	
 	browse: {
+	
 		index: function () {
-			$("#register-form").on('submit.ajax', DIGALLERY.browse.register_ajax);
+			$("#register-form").on('submit.ajax', DIGALLERY.browse._register_ajax);
 		},
-		disable_register_form: function () {
+		
+		_disable_register_form: function () {
 			var $form = $("#register-form"),
 				$button_submit = $('button', $form);
 
@@ -14,20 +17,22 @@ DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, 
 
 			$button_submit.addClass('disabled');
 		},
-		enable_register_form: function () {
+		
+		_enable_register_form: function () {
 			var $form = $("#register-form"),
 				$button_submit = $('button', $form);
 
 			$form.off('submit.ajax');
 
-			$form.on('submit.ajax', DIGALLERY.browse.register_ajax);
+			$form.on('submit.ajax', DIGALLERY.browse._register_ajax);
 			$button_submit.removeClass('disabled');
 		},
-		register_ajax: function (event) {
+		
+		_register_ajax: function (event) {
 			/* stop form from submitting normally */
 			event.preventDefault();
 
-			DIGALLERY.browse.disable_register_form();
+			DIGALLERY.browse._disable_register_form();
 
 			var $form = $(this),
 				url = '/user/register_ajax/',
@@ -67,7 +72,7 @@ DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, 
 						$button_submit.popover('destroy');
 					});
 
-					DIGALLERY.browse.enable_register_form();
+					DIGALLERY.browse._enable_register_form();
 				}
 			}, "json").fail(function () {
 				window.location = '/user/register/';
