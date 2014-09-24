@@ -189,6 +189,19 @@ class Testowy extends MY_Controller
 		
 		echo 'ley';
 	}
+	
+	function klopoty($param = 'd!!!+ą---pol\'ską') {
+		
+		
+		
+		$param = substr(preg_replace('%((?<=[^\p{L}\p{N}])[\'\-]|[\'\-](?=[^\p{L}\p{N}]))%u', '', ' ' . $param . ' '), 1, -1);
+		
+		$param = preg_replace('%(?![\'\-\%\*])[^\p{L}\p{N}]+%u', ' ', $param);
+		
+		echo $param;
+	}
+	
+	
 }
 
 /* End of file testowy.php */

@@ -19,6 +19,7 @@ class Browse_model extends CI_Model
 
 	public function get_images_categories()
 	{
+		$this->db->where('lft > 1');
 		$query = $this->db->get('images_categories');
 
 		return $query->result();		
@@ -320,7 +321,6 @@ class Browse_model extends CI_Model
 				}
 			}
 		}
-		
 		return $result;
 	}
 
@@ -329,6 +329,9 @@ class Browse_model extends CI_Model
 		$table_name = $this->categories_tables[$type];
 		
 		$this->db->where('parent_cat_id', $parent_id);
+		$this->db->where('lft > 1');
+		$this->db->order_by('lft', 'ASC');
+		
 		$query = $this->db->get($table_name);
 
 		return $query->result_array();

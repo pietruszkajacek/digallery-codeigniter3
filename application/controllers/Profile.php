@@ -281,8 +281,8 @@ class Profile extends MY_Controller
 					
 			if ($this->form_validation->run() == TRUE)
 			{
-				$user_tags = split_tags(strtolower($this->input->post('tags')));
-				$title_desc_tags = split_tags(strtolower($this->input->post('gallery_name') . ' ' . $this->input->post('gallery_description')));
+				$user_tags = split_tags(mb_strtolower($this->input->post('tags')), "UTF-8");
+				$title_desc_tags = split_tags(mb_strtolower($this->input->post('gallery_name') . ' ' . $this->input->post('gallery_description')), "UTF-8");
 				$tags = array_unique(array_merge($user_tags, $title_desc_tags));
 						
 				//Walidacja OK!
@@ -543,17 +543,6 @@ class Profile extends MY_Controller
 	{
 		if ($this->input->is_ajax_request())
 		{
-			/*
-			$parse_str = '';
-
-			foreach ($this->browse_model->get_images_categories() as $row)
-			{
-				$parse_str .= $row->id . '/' . $row->name_cat . '/' . ($row->parent_cat_id === NULL ? 'null' : $row->parent_cat_id) . '|';
-			}
-			echo substr($parse_str, 0, strlen($parse_str) - 1);
-			 * 
-			 */
-			
 			$this->output
 				->set_content_type('application/json')
 				->set_output(json_encode($this->browse_model->get_images_categories()));			
@@ -696,10 +685,10 @@ class Profile extends MY_Controller
 			if ($this->form_validation->run() == TRUE)
 			{
 				//Walidacja OK!
-
-				$user_tags = split_tags(strtolower($this->input->post('tags')));
-				$tags = split_tags(strtolower($this->input->post('title') . ' ' . $this->input->post('description')));
-								
+				
+				$user_tags = split_tags(mb_strtolower($this->input->post('tags')));
+				$tags = split_tags(mb_strtolower($this->input->post('title') . ' ' . $this->input->post('description')));
+				
 				$user_data = array(
 					'user_id' => $user->id,
 					'title' => $this->input->post('title'),

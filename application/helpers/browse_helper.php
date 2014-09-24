@@ -49,7 +49,7 @@ if ( ! function_exists('split_tags'))
 	{
 		// Remove any apostrophes or dashes which aren't part of words
 		$text = substr(preg_replace('%((?<=[^\p{L}\p{N}])[\'\-]|[\'\-](?=[^\p{L}\p{N}]))%u', '', ' ' . $text . ' '), 1, -1);
-
+		
 		// Remove punctuation and symbols (actually anything that isn't a letter or number), allow apostrophes and dashes (and % * if we aren't indexing)
 		$text = preg_replace('%(?![\'\-\%\*])[^\p{L}\p{N}]+%u', ' ', $text);
 
