@@ -44,7 +44,7 @@ class User extends MY_Controller
 			}
 			else
 			{
-				if (reverse_valid_csrf_nonce())
+				if ($this->_valid_csrf_nonce())
 				{
 					//reguły walidacji formularza logowania
 					$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
@@ -236,7 +236,9 @@ class User extends MY_Controller
 				'password_confirm' => form_error('password_confirm') ? ' error' : '',
 				'math_captcha' => form_error('math_captcha') ? ' error' : '',
 			);
-			
+
+			$this->has_dropdown_menu_top_bar = FALSE;
+			$this->has_nav_top_bar = FALSE;
 			$this->render();
 		}
 	}
@@ -421,6 +423,8 @@ class User extends MY_Controller
 					'password' => form_error('password') ? ' error' : '',
 				);
 
+				$this->has_dropdown_menu_top_bar = FALSE;
+				$this->has_nav_top_bar = FALSE;
 				$this->render();
 			}
 		}

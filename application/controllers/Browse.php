@@ -43,10 +43,14 @@ class Browse extends MY_Controller
 		
 		$this->data['csrf'] = get_csrf_nonce();
 		
-		$this->data['js'][] = 'jquery.placeholder.min.js'; //TODO:
+		$this->javascript[] = 'jquery.placeholder.min.js'; //TODO:
+		$this->css[] = 'jquery.placeholder.min.css'; //TODO:
+		
+		$this->has_top_header = FALSE;
+		
 		//$this->data['js'][] = 'start_page.js';
 				
-		$this->data['no_container_class'] = TRUE;
+		//$this->data['no_container_class'] = TRUE;
 		
 		$this->render();
 	}

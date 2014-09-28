@@ -114,4 +114,12 @@ class Posts_model extends CI_Model
 
 		return $this->db->affected_rows() == 1;
 	}
+	
+	public function counts_unreaded_posts($user_id) 
+	{
+		$this->db->where(array('user_id_to' => $user_id, 'viewed' => 0, 'inbox' => 1));
+		$this->db->from('posts');
+		
+		return $this->db->count_all_results();
+	}
 }

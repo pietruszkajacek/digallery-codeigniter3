@@ -35,14 +35,14 @@ DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, 
 			DIGALLERY.browse._disable_register_form();
 
 			var $form = $(this),
-				url = '/user/register_ajax/',
-				$csrf_hidden = $('input:hidden', $form),
-				csrf_key = $csrf_hidden.attr('name'),
-				csrf_value = $csrf_hidden.attr('value');
+				url = '/user/register_ajax/';
+				$csrf_hidden = $('input:hidden', $form);
+//				csrf_key = $csrf_hidden.attr('name'),
+//				csrf_value = $csrf_hidden.attr('value');
 
-			$csrf_hidden
-					.attr('name', csrf_value)
-					.attr('value', csrf_key);
+//			$csrf_hidden
+//					.attr('name', csrf_value)
+//					.attr('value', csrf_key);
 
 			$.post(url, $form.serialize(), function (data) {
 				if (data.status == 1)
@@ -63,7 +63,7 @@ DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, 
 					});
 
 					$button_submit.popover('show');
-
+					
 					$csrf_hidden
 							.attr('name', Object.keys(data.csrf_key)[0])
 							.attr('value', data.csrf_key[Object.keys(data.csrf_key)[0]]);

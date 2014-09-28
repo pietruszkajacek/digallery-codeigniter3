@@ -74,10 +74,7 @@ class Image extends MY_Controller
 		}		
 		
 		$this->increment_downloads($image_id);
-		
-		//$this->data['js'][] = 'zoom.js';
-		
-		$this->data['no_container_class'] = TRUE;
+
 		$this->render();
 	}
 	
@@ -197,8 +194,7 @@ class Image extends MY_Controller
 			$this->data['adult_filter'] = FALSE;
 		}
 		
-		$this->data['js'][] = 'comments.js';
-		//$this->data['js'][] = 'preview.js';
+		$this->javascript[] = 'comments.js';
 
 		$this->data['name_of_ratings'] = $this->config->item('name_of_ratings', 'digallery');
 

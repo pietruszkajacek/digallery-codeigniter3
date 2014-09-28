@@ -113,8 +113,8 @@ class Gallery extends MY_Controller
 		
 		$this->data['name_of_ratings'] = $this->config->item('name_of_ratings', 'digallery');
 		
-		$this->data['js'][] = 'comments.js';
-		$this->data['js'][] = 'jquery.jcarousel.min.0.2.8.js';
+		$this->javascript[] = 'comments.js';
+		$this->javascript[] = 'jquery.jcarousel.min.0.2.8.js';
 		//$this->data['js'][] = 'jquery.jcarousel.min.0.3.0.js';
 		//$this->data['js'][] = 'gallery_view.js';
 

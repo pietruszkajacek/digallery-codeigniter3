@@ -520,9 +520,7 @@ class Profile extends MY_Controller
 		
 		$this->data['profile_signature'] = $this->typography->auto_typography(htmlEscapeAndLinkUrls($user->signature_profile), TRUE);
 		
-		//$this->data['js'][] = 'comments.js';
-		//$this->data['js'][] = 'profile.js';
-		
+		$this->javascript[] = 'comments.js';
 		$this->render();
 	}
 	
@@ -1032,13 +1030,8 @@ class Profile extends MY_Controller
 				}
 
 				// wybór kategorii i walidacja formularza
-				$this->data['js'][] = 'widget.js';
-				//$this->data['js'][] = 'submit.js';
-
+				$this->javascript[] = 'widget.js';
 				$this->render();
-
-				//$cats_uri_rows = $this->browse_model->get_cats_uri_rows($this->browse_model->build_path_cats($image->category_id));
-				//$cats_path = $this->browse_model->create_hierarchical_path(base_url() . 'browse/', $cats_uri_rows);
 			}
 		}
 		else

@@ -1,14 +1,15 @@
-<div class="row">
-	<div class="span10">
-		<?php $this->load->view('partials/message_error.tpl.php');?>
-		<h3>Poczta <small>skrzynka nadawcza</small></h3>
-		<hr>
-		<ul class="nav nav-pills">
-			<li><?php echo anchor('posts/compose/', 'Napisz wiadomość'); ?></li>
-			<li><?php echo anchor('posts/inbox/', 'Odebrane'); ?></li>
-			<li class="active"><?php echo anchor('posts/outbox/', 'Wysłane'); ?></li>
-		</ul>
-		<?php echo form_open('posts/outbox/'.$current_page, $form_attr); ?>
+<div class="container" id="main-content">
+	<div class="row">
+		<div class="span10">
+			<?php $this->load->view('partials/message_error.tpl.php'); ?>
+			<h3>Poczta <small>skrzynka nadawcza</small></h3>
+			<hr>
+			<ul class="nav nav-pills">
+				<li><?php echo anchor('posts/compose/', 'Napisz wiadomość'); ?></li>
+				<li><?php echo anchor('posts/inbox/', 'Odebrane'); ?></li>
+				<li class="active"><?php echo anchor('posts/outbox/', 'Wysłane'); ?></li>
+			</ul>
+			<?php echo form_open('posts/outbox/' . $current_page, $form_attr); ?>
 			<table class="table table-hover table-striped">
 				<thead>
 					<tr>
@@ -20,20 +21,20 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($posts as $post):?>
+					<?php foreach ($posts as $post): ?>
 						<tr <?php echo (!$post['viewed'] ? 'style="font-weight: bold;"' : '') ?> >
 							<td><input type="checkbox" name="posts[]" value="<?php echo $post['message_id']; ?>"></td>
 							<td><?php echo anchor('posts/' . $post['message_id'] . '/out/', $post['subject']); ?></td>
-							<td><?php echo anchor('profile/'.$post['to_id'], $post['to']); ?></td>
+							<td><?php echo anchor('profile/' . $post['to_id'], $post['to']); ?></td>
 							<td><?php echo $post['date']; ?></td>
 							<td><a class="btn btn-mini" href="#"><i class="icon-trash"></i></a></td>
 						</tr>
 					<?php endforeach; ?>
 					<?php if (empty($posts)) : ?>
-					<tr>
-						<td></td>
-						<td colspan="5">Nie masz żadnych wiadomości...</td>
-					</tr>
+						<tr>
+							<td></td>
+							<td colspan="5">Nie masz żadnych wiadomości...</td>
+						</tr>
 					<?php endif; ?>
 				</tbody>
             </table>
@@ -42,9 +43,10 @@
 					<button type="submit" class="btn btn-danger">Usuń zaznaczone</button>
 				</div>
 			<?php endif; ?>
-		<?php echo form_close(); ?>
-		<div class="pagination pagination-right">
-			<?php echo $pagination_links; ?>
+			<?php echo form_close(); ?>
+			<div class="pagination pagination-right">
+				<?php echo $pagination_links; ?>
+			</div>
 		</div>
 	</div>
 </div>

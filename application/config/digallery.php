@@ -1,5 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+$config['meta']['title']			= 'Fotograficzny Portal Społecznościowy - digallery';
+$config['meta']['site_description']		= 'Fotograficzny Portal Społecznościowy. Pokaż światu swoje prace niezależnie czy jesteś amatorem czy profesjonalistą.';
+$config['meta']['site_keywords']			= 'fotografia cyfrowa, zdjęcia';
+$config['meta']['site_author']			= 'Jacek Pietruszka';
+
 $config['uploads']['path']			= 'uploads/';
 $config['uploads']['file_type']		= 'gif|jpg|jpeg|png';
 $config['uploads']['max_size']		= '8192';
