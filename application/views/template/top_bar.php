@@ -1,6 +1,7 @@
 <div class="navbar navbar-fixed-top navbar-inverse">
 	<div class="navbar-inner">
 		<div class="container">
+			<a class="brand" href="/">Digallery</a>
 			<?php if (isset($nav)) : ?>
 				<?php echo $nav; ?>
 			<?php endif; ?>

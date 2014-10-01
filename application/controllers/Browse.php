@@ -47,11 +47,7 @@ class Browse extends MY_Controller
 		$this->css[] = 'jquery.placeholder.min.css'; //TODO:
 		
 		$this->has_top_header = FALSE;
-		
-		//$this->data['js'][] = 'start_page.js';
-				
-		//$this->data['no_container_class'] = TRUE;
-		
+
 		$this->render();
 	}
 	
@@ -272,49 +268,39 @@ class Browse extends MY_Controller
 		
 		$this->render();
 	}
-		
-	public function galleries()
-	{		
+	
+	function galleries()
+	{
 		$this->load->helper(array('browse', 'urlslug'));
 		$this->load->model('browse_model');
-
-		$cats_uri_rows = $this->browse_model->get_cats_uri_rows(array_slice($this->uri->segment_array(), 2), 'galleries');
-
-		$search_tags = get_search_tags($this->input->get('search'));
 		
+		// Sprawdz poprawnosc sciezki kategorii przekazanej poprzez URI. Jesli sciezka prawidlowa to zwracana jest 
+		// pelna informacja o sciezce z bazy lub pusta tablica w przeciwnym wypadku.
+		// Pusta tablica zwracana jest takze w wypadku braku sciezki kategorii w URI tzn. URI zawiera tylko nazwe kontrolera i metody
+		// jak sie to dzieje w przypadku wyboru wszystkich kategorii do wyswietlenia.
+		$cats_uri_rows = $this->browse_model->get_cats_uri_rows(array_slice($this->uri->segment_array(), 2), 'galleries');
+		
+		// Nieprawidlowa sciezka kategorii w URI
+		if (count($this->uri->segment_array()) > 2 && empty($cats_uri_rows))
+		{
+			show_error('Nieprawidłowa sciezka kategorii.');
+		}
+		
+		$search_tags = get_search_tags($this->input->get('search'));
+
 		$filter = get_filter_param($this->input->get('filter'));
 		$sort = get_sort_param($this->input->get('sort'));
 		$search = implode("+", $search_tags);
 
-		$this->get_uri = create_get_params_uri($filter, $sort, $search);
-
-		// menu nawigacyjne kategorii
-		$this->data['navi_cats'] = $this->create_navigation_cats($cats_uri_rows, base_url() . 'browse/galleries/', 'galleries');
-
-		if (empty($this->data['navi_cats']))
-		{
-			show_404();
-		}
-
-		$this->data['adult_user'] = $this->adult_user;
-		
-		if ($this->ion_auth->logged_in())
-		{
-			//gdy zalogowany
-			$this->data['logged_in_user'] = $this->ion_auth->user()->row();
-		}
-
-		$page_size = 18;
+		$page_size = 18; // TODO: powinno byc pobierane z configa
 		$current_page = is_null($this->input->get('page')) ? 1 : intval($this->input->get('page'));
 
 		if ($current_page < 1)
 		{
-			show_404();
+			show_error('Nieprawidłowa strona');
 		}
-
-		$count_uri_segs = count($this->uri->segment_array());
-
-		if ($count_uri_segs <= 2)
+		
+		if (empty($cats_uri_rows))
 		{
 			$all_galleries = $this->browse_model->get_count_thumb_galleries(0, $filter, $sort, 0, $search_tags);
 		}
@@ -323,7 +309,7 @@ class Browse extends MY_Controller
 			$last_row = end($cats_uri_rows);
 			$all_galleries =  $this->browse_model->get_count_thumb_galleries($last_row['id'], $filter, $sort, 0, $search_tags);
 		}
-
+		
 		if ($all_galleries > 0)
 		{
 			$max_pages = ceil($all_galleries / $page_size);
@@ -332,11 +318,11 @@ class Browse extends MY_Controller
 			{
 				show_404();
 			}
-
+			
 			$current_page + 1 > $max_pages ? $this->data['next'] = FALSE : $this->data['next'] = TRUE;
 			$current_page - 1 == 0 ? $this->data['preview'] = FALSE : $this->data['preview'] = TRUE;
-			$this->data['thumbs_small_gallery'] = $this->browse_model->get_thumb_galleries(($count_uri_segs <= 2 ? 0 : $last_row['id']), $filter, $sort, 0, $current_page, $page_size, $search_tags);
-			
+			$this->data['thumbs_small_gallery'] = $this->browse_model->get_thumb_galleries((empty($cats_uri_rows) ? 0 : $last_row['id']), $filter, $sort, 0, $current_page, $page_size, $search_tags);
+
 			foreach ($this->data['thumbs_small_gallery'] as &$thumb)
 			{
 				$thumb['gallery_thumb_images'] = $this->browse_model->get_imgs_filename_to_gallery_thumb($thumb['id'], 5);
@@ -354,24 +340,34 @@ class Browse extends MY_Controller
 
 			$this->data['thumbs_small_gallery'] = array();
 		}
-
+		
+		if ($this->ion_auth->logged_in())
+		{
+			//gdy zalogowany
+			$this->data['logged_in_user'] = $this->ion_auth->user()->row();
+		}
+		
+		$this->data['adult_user'] = $this->adult_user;
+		
+		// menu nawigacyjne kategorii
+		$this->data['navi_cats'] = $this->create_navigation_cats($cats_uri_rows, base_url() . 'browse/galleries/', 'galleries');
+		
 		$this->data['current_page'] = $current_page;
 
-		$this->data['get_uri'] = $this->get_uri;
+		$this->data['get_uri'] = create_get_params_uri($filter, $sort, $search);
 		$this->data['get_uri_clear_search'] = create_get_params_uri($filter, $sort);
-		
-		$browse_config = $this->config->item('browse', 'digallery');
-		
+
+		$browse_config = $this->config->item('browse', 'digallery');	
 		$this->data['nav_list_filter'] = $browse_config['filter'];
 		$this->data['nav_list_sort'] = $browse_config['sort'];
 
 		$this->data['filter'] = $filter;
 		$this->data['sort'] = $sort;
 		$this->data['search'] = $search;
-
+			
 		//$this->data['thumb_small_config'] = $this->config->item('thumb_small', 'digallery');
 		$this->data['thumb_mini_config'] = $this->config->item('thumb_mini', 'digallery');
-
+		
 		$this->data['message'] = array('type' => $this->session->flashdata('type'), 'msg' => $this->session->flashdata('msg'));
 
 		//formularz wyszukiwania
@@ -388,9 +384,9 @@ class Browse extends MY_Controller
 			'class' => 'input-medium search-query',
 			'type' => 'text',
 			'value' => implode(" ", $search_tags),
-		);		
+		);
 		
-		$this->render();
+		$this->render();		
 	}
 }
 
