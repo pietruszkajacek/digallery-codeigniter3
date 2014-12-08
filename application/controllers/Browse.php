@@ -154,8 +154,66 @@ class Browse extends MY_Controller
 		}
 	}
 
+	public function _images()
+	{
+		throw new Exception('sdfsd');
+		
+		$this->load->model('hcategories_model');
+		$this->hcategories_model->init_by_path('images_categories', array_slice($this->uri->segment_array(), 2));
+		
+		if (!$this->hcategories_model->validate_categories_path())
+		{
+			show_error('Nieprawidłowa sciezka kategorii.');
+		}
+		
+		$search_tags = get_search_tags($this->input->get('search'));
+
+		$filter = get_filter_param($this->input->get('filter'));
+		$sort = get_sort_param($this->input->get('sort'));
+		$search = implode("+", $search_tags);
+
+		$page_size = 18; // TODO: powinno byc pobierane z configa
+		$current_page = is_null($this->input->get('page')) ? 1 : intval($this->input->get('page'));
+
+		if ($current_page < 1)
+		{
+			show_error('Nieprawidłowa strona');
+		}
+		
+		$all_images = $this->browse_model->get_count_thumb_images($this->hcategories_model->get_current_cat_id, $filter, $sort, 0, $search_tags);
+		
+		if ($all_images > 0)
+		{
+			$max_pages = ceil($all_images / $page_size);
+
+			if ($current_page > $max_pages)
+			{
+				show_404();
+			}
+			
+			$current_page + 1 > $max_pages ? $this->data['next'] = FALSE : $this->data['next'] = TRUE;
+			$current_page - 1 == 0 ? $this->data['preview'] = FALSE : $this->data['preview'] = TRUE;
+			
+			$this->data['thumbs_small'] = $this->browse_model->get_thumb_images($this->hcategories_model->get_current_cat_id, $filter, $sort, 0, $current_page, 
+					$page_size, $search_tags);
+		}
+		else
+		{
+			if ($current_page > 1)
+			{
+				show_404();
+			}
+
+			$this->data['next'] = FALSE;
+			$this->data['preview'] = FALSE;
+
+			$this->data['thumbs_small'] = array();
+		}
+		
+	}
+	
 	public function images()
-	{		
+	{	
 		$this->load->helper(array('browse', 'urlslug'));
 		$this->load->model('browse_model');
 		
