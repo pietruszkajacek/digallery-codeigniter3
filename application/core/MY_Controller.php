@@ -120,14 +120,14 @@ class MY_Controller extends CI_Controller
 		$view_path = $this->controller_name . '/' . $this->action_name . '.php'; //set the path of the view
 		if (file_exists(APPPATH . 'views/' . $view_path))
 		{
-			$toBody["content_body"] = $this->load->view($view_path, $this->data, TRUE);  //load the view
+			$to_body["content_body"] = $this->load->view($view_path, $this->data, TRUE);  //load the view
 		}
 
-		$toTopBar = array();
+		$to_top_bar = array();
 		// top bar menu
 		if ($this->has_nav_top_bar)
 		{
-			$toTopBar["nav"] = $this->load->view("template/nav_top_bar", '', TRUE);
+			$to_top_bar["nav"] = $this->load->view("template/nav_top_bar", '', TRUE);
 		}
 
 		if ($this->has_info_panel_top_bar)
@@ -135,39 +135,39 @@ class MY_Controller extends CI_Controller
 			if ($this->ion_auth->logged_in())
 			{
 				$this->load->model('posts_model');
-				$toInfoPanel['number_of_unreaded_posts'] = $this->posts_model->counts_unreaded_posts($this->ion_auth->user()->row()->id);
+				$to_info_panel['number_of_unreaded_posts'] = $this->posts_model->counts_unreaded_posts($this->ion_auth->user()->row()->id);
 
-				$toTopBar["info_panel"] = $this->load->view("template/info_panel_top_bar", $toInfoPanel, TRUE);
+				$to_top_bar["info_panel"] = $this->load->view("template/info_panel_top_bar", $to_info_panel, TRUE);
 			}
 		}
 
 		// top bar dropdown menu
 		if ($this->has_dropdown_menu_top_bar)
 		{
-			$toTopBar["dropdown_menu"] = $this->load->view("template/dropdown_menu_top_bar", '', TRUE);
+			$to_top_bar["dropdown_menu"] = $this->load->view("template/dropdown_menu_top_bar", '', TRUE);
 		}
 
-		$toBody["basejs"] = $this->load->view("template/basejs", $this->data, TRUE);
-		$toBody["top_bar"] = $this->load->view("template/top_bar", $toTopBar, TRUE);
-		$toBody["footer"] = $this->load->view("template/footer", '', TRUE);
+		$to_body["basejs"] = $this->load->view("template/basejs", $this->data, TRUE);
+		$to_body["top_bar"] = $this->load->view("template/top_bar", $to_top_bar, TRUE);
+		$to_body["footer"] = $this->load->view("template/footer", '', TRUE);
 
 		// static
-		$toTpl["controller_name"] = $this->controller_name;
-		$toTpl["action_name"] = $this->action_name;
-		$toTpl["javascript"] = $this->javascript;
-		$toTpl["css"] = $this->css;
-		$toTpl["fonts"] = $this->fonts;
+		$to_tpl["controller_name"] = $this->controller_name;
+		$to_tpl["action_name"] = $this->action_name;
+		$to_tpl["javascript"] = $this->javascript;
+		$to_tpl["css"] = $this->css;
+		$to_tpl["fonts"] = $this->fonts;
 
 		// meta
-		$toTpl["title"] = $this->title;
-		$toTpl["description"] = $this->description;
-		$toTpl["keywords"] = $this->keywords;
-		$toTpl["author"] = $this->author;
+		$to_tpl["title"] = $this->title;
+		$to_tpl["description"] = $this->description;
+		$to_tpl["keywords"] = $this->keywords;
+		$to_tpl["author"] = $this->author;
 
-		$toTpl["body"] = $this->load->view("template/" . $this->template, $toBody, TRUE);
+		$to_tpl["body"] = $this->load->view("template/" . $this->template, $to_body, TRUE);
 
 		// render view
-		$this->load->view("template/skeleton", $toTpl);
+		$this->load->view("template/skeleton", $to_tpl);
 	}
 
 	protected function save_url()

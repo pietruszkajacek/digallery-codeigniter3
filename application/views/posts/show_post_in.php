@@ -1,6 +1,6 @@
 <div class="container" id="main-content">
 	<div class="row">
-		<div id="compose-message" class="span10">
+		<div id="compose-message" class="span11 offset2">
 			<h3>Poczta <small>skrzynka odbiorcza</small></h3>
 			<hr>
 			<ul class="nav nav-pills">

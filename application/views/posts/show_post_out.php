@@ -1,6 +1,6 @@
 <div class="container" id="main-content">
 	<div class="row">
-		<div class="span10">
+		<div class="span11 offset2">
 			<?php $this->load->view('partials/message_error.tpl.php'); ?>
 			<h3>Poczta <small>skrzynka nadawcza</small></h3>
 			<hr>

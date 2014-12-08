@@ -156,8 +156,6 @@ class Browse extends MY_Controller
 
 	public function _images()
 	{
-		throw new Exception('sdfsd');
-		
 		$this->load->model('hcategories_model');
 		$this->hcategories_model->init_by_path('images_categories', array_slice($this->uri->segment_array(), 2));
 		

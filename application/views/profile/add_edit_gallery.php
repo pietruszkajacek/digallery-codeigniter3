@@ -1,6 +1,6 @@
 <div class="container" id="main-content">
 	<div class="row">
-		<div id="content-add-edit-gallery" class="span11">
+		<div id="content-add-edit-gallery" class="span11 offset2">
 			<?php $this->load->view('partials/message_error.tpl.php'); ?>
 			<?php $this->load->view('partials/validation_error.tpl.php'); ?>
 			<?php if (isset($gallery)) : ?>

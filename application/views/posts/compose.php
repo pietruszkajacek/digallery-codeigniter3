@@ -1,6 +1,6 @@
 <div class="container" id="main-content">
 	<div class="row">
-		<div id="compose-message" class="span10">
+		<div id="compose-message" class="span11 offset2">
 			<?php $this->load->view('partials/message_error.tpl.php'); ?>
 			<?php $this->load->view('partials/validation_error.tpl.php'); ?>
 			<h3>Poczta <small>wyślij wiadomość</small></h3>
