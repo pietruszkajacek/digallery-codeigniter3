@@ -1,9 +1,3 @@
-//			var output = '';
-//			for ( var property in this ) {
-//				output += property + ': ' + this[property] + '; ';
-//			}
-//			alert( output );
-
 DIGALLERY = $.extend(true, (typeof DIGALLERY === 'undefined') ? {} : DIGALLERY, {
 	common: {
 		init: function () {

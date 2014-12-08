@@ -42,8 +42,20 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
+/*
+ *---------------------------------------------------------------
+ * Required by vipserv.org - fastcgi php
+ *---------------------------------------------------------------
+ */
+if (isset($_SERVER['REDIRECT_CI_ENV']))
+{
+	$_SERVER["CI_ENV"] = $_ENV["CI_ENV"] = $_SERVER["REDIRECT_CI_ENV"];
+	putenv("CI_ENV=".$_SERVER["REDIRECT_CI_ENV"]);
+}
+
+define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+			
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
