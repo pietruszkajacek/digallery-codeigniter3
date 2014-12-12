@@ -43,8 +43,8 @@ class Browse extends MY_Controller
 		
 		$this->data['csrf'] = get_csrf_nonce();
 		
-		$this->javascript[] = 'jquery.placeholder.min.js'; //TODO:
-		$this->css[] = 'jquery.placeholder.min.css'; //TODO:
+		//$this->javascript[] = 'jquery.placeholder.min.js'; //TODO:
+		//$this->css[] = 'jquery.placeholder.min.css'; //TODO:
 		
 		$this->has_top_header = FALSE;
 
@@ -154,15 +154,18 @@ class Browse extends MY_Controller
 		}
 	}
 
-	public function _images()
+	public function images2()
 	{
-		$this->load->model('hcategories_model');
-		$this->hcategories_model->init_by_path('images_categories', array_slice($this->uri->segment_array(), 2));
+		$this->load->model('hpathcats_model');
+		$this->hpathcats_model->init_by_path('images_categories', array_slice($this->uri->segment_array(), 2));
 		
-		if (!$this->hcategories_model->validate_categories_path())
+		if (!$this->hpathcats_model->validate_categories_path())
 		{
 			show_error('Nieprawidłowa sciezka kategorii.');
 		}
+		
+		$this->load->model('hcategories_images_model');
+		
 		
 		$search_tags = get_search_tags($this->input->get('search'));
 

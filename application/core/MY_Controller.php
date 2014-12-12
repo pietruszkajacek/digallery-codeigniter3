@@ -5,7 +5,6 @@ if (!defined('BASEPATH'))
 
 class MY_Controller extends CI_Controller
 {
-
 	//Page info
 	protected $data = array();
 	protected $page_name = FALSE;
