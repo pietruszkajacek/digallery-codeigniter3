@@ -1,5 +1,5 @@
-<ul class="nav pull-right">
+<ul class="nav navbar-nav navbar-right">
 	<li>
-		<?php echo anchor('/posts/inbox', '<i class="icon-inbox"></i> ' . '<small>' . $number_of_unreaded_posts . '</small>'); ?>
+		<?php echo anchor('/posts/inbox', '<span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> ' . $number_of_unreaded_posts); ?>
 	</li>
 </ul>
