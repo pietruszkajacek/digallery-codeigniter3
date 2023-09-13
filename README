@@ -2,6 +2,22 @@ digallery.pl
 --------------------------------------------------------------------------------
 Fotograficzny portal społecznościowy - praca dyplomowa 
 
+Podstawowe funkcjonalności portalu:
+1. Zakładanie konta użytkownika (aktywacja przez wysłanie linku aktywacyjnego na adres email podany podczas rejestracji).
+2. Możliwość zmiany hasła do konta gdy hasło zostanie zapomniane.
+3. Edycja profilu użytkownika (zmiana danych podstawowych, sygnaturki dołączanej do komentarzy oraz sygnaturki (opisu) profilu, avatar, zdjęcie użytkownika).
+4. Poczta (podstawowe funkcje wysyłania, odbierania, usuwania wiadomości). Wybór adresata wspomagany podpowiadaniem (po wpisaniu 3 znaków adresata).
+5. Wczytywanie zdjęć na serwer (tagowanie na podstawie tytułu, opisu zdjęcia oraz tagów użytkownika).
+6. Edycja zdjęć (zmiana tytułu, opisu, tagów, kategorii do której należy zdjęcie).
+7. Tworzenie galerii z możliwością edycji (zmiana tytułu, opisu, tagów) wraz z możliwością ustalania kolejności zdjęć w galerii (tagowanie na takiej samej zasadzie jak przy zdjęciach).
+8. Komentowanie zdjęć, galerii i profilów wraz z możliwością edycji i usuwania własnych komentarzy oraz usuwania niechcianych komentarzy pod własnymi pracami, galeriami oraz profilem.
+9. Ocenianie zdjęć oraz galerii.
+10. Możliwość wyłączenia komentowania oraz oceny danego zdjęcia i galerii.
+11. Przeglądanie zdjęć z możliwością wyboru filtru czasu oraz metody sortowania (czas dodania, ocena, ulubione).
+12. Przeglądanie galerii z możliwością wyboru filtru czasu.
+13. Dodawanie zdjęć do ulubionych.
+14. Wyszukiwanie zdjęć oraz galerii w oparciu o tagi.
+
 Uniwersytet Śląski w Katowicach
 Wydział Informatyki i Nauki o Materiałach
 
